@@ -17,7 +17,9 @@ Targeted human intelligence (HUMINT) exploitation bypasses technical security pe
 - **OPSEC Redaction and Ephemeral Sessions (`scripts/sanitizer.py`)**: Redacts emails, telephone numbers, SSNs, card numbers, IP addresses, tokenized URLs, and configured entity names prior to ephemeral storage or reporting, and supports zero-byte overwrite deletion of temporary session files.
 - **Non-Escalatory Defensive Protocols (`scripts/report_generator.py`)**: Generates structured JSON and Markdown diagnostic reports, MDM/credential containment steps, privileged CSO escalation guidance, and domain-tailored passive Canary Protocol scripts.
 
-For detailed architectural diagrams, mathematical specifications, and error-handling contracts, see `documents/prd.md`.
+For detailed architectural specifications, mathematical derivations, and error-handling contracts, see `documents/prd.md`.
+
+![Counterintelligence Honeypot Diagnostic Skill Architecture and Workflow](assets/skill_architecture_flow.png)
 
 ---
 
@@ -35,6 +37,7 @@ All paths are relative to the project root directory:
 │   ├── indicators_taxonomy.json            # 32 weighted CI and fraud indicators + priors
 │   ├── probes_and_countermeasures.json     # Adaptive probes, dynamic rules, Canary playbooks
 │   ├── report_template.md                  # Markdown executive diagnostic report template
+│   ├── skill_architecture_flow.png         # End-to-end architecture and diagnostic brief diagram
 │   └── schemas/
 │       ├── report_schema.json              # Final diagnostic report JSON schema
 │       └── session_schema.json             # Ephemeral session JSON schema
