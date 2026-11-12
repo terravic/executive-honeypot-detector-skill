@@ -1,0 +1,268 @@
+{
+  "schema_version": "1.0.0",
+  "inception_prompt": {
+    "probe_id": "PROBE_INCEPTION",
+    "tier": "tier_1_approach",
+    "framing_objective": "Establish psychological safety and capture the unprompted origin narrative without triggering defensiveness.",
+    "question": "This diagnostic is a routine, confidential executive risk review designed to look objectively at situational patterns rather than judge personal choices. Please avoid sharing real names, phone numbers, or specific company identifiers. To begin, could you describe how and where you first met this partner, who initiated the conversation, and what stood out about that initial interaction?"
+  },
+  "probes": {
+    "PROBE_BASE_APPROACH": {
+      "tier": "tier_1_approach",
+      "priority": 10,
+      "question": "Thinking back to your first encounter, where did you meet, who initiated the interaction, and did the meeting feel connected to any publicized travel or industry event?"
+    },
+    "PROBE_AV_ITINERARY": {
+      "tier": "tier_1_approach",
+      "priority": 25,
+      "question": "Prior to that meeting, had your attendance, travel dates, speaking engagement, or hotel location been publicized or shared across professional networks?"
+    },
+    "PROBE_AV_JUSTIFICATION": {
+      "tier": "tier_1_approach",
+      "priority": 24,
+      "question": "What reason did your partner give for being at that specific venue or city, and was their attendance linked to an independently verifiable event or employer?"
+    },
+    "PROBE_AV_CONTEXT": {
+      "tier": "tier_1_approach",
+      "priority": 23,
+      "question": "Did your partner seem to share unusually specific niche interests or display subtle familiarity with your industry or personal background before you brought those topics up?"
+    },
+    "PROBE_BASE_LEGEND": {
+      "tier": "tier_2_legend",
+      "priority": 12,
+      "question": "How does your partner describe their career and background, and have you encountered verifiable institutional records, colleagues, or long-term personal contacts in person?"
+    },
+    "PROBE_LV_FOOTPRINT": {
+      "tier": "tier_2_legend",
+      "priority": 28,
+      "question": "Does their claimed profession or business have a verifiable physical corporate footprint, public registry presence, or multi-year institutional history you have seen directly?"
+    },
+    "PROBE_LV_ASSOCIATES": {
+      "tier": "tier_2_legend",
+      "priority": 27,
+      "question": "Have you met any verifiable, long-term personal contacts, childhood acquaintances, colleagues, or direct family members in person?"
+    },
+    "PROBE_LV_TIMELINE": {
+      "tier": "tier_2_legend",
+      "priority": 26,
+      "question": "Looking at their career, residence history, and online footprint over time, have any timeline details seemed inconsistent, unusually thin, or difficult to reconcile?"
+    },
+    "PROBE_BASE_ELICITATION": {
+      "tier": "tier_3_elicitation",
+      "priority": 14,
+      "question": "When conversations turn toward your work, what level of interest do they show in internal governance, strategic deals, reorganizations, or proprietary technical projects?"
+    },
+    "PROBE_IE_TACTICS": {
+      "tier": "tier_3_elicitation",
+      "priority": 38,
+      "question": "When discussing your work, do they use flattery to encourage venting, pretend complete technical ignorance to prompt detailed explanations, or make provocative assertions to see if you correct them?"
+    },
+    "PROBE_IE_SPECIFICS": {
+      "tier": "tier_3_elicitation",
+      "priority": 37,
+      "question": "Have their questions moved beyond general curiosity into specific entity names, project codenames, timelines, valuations, or interpersonal tensions among senior leadership?"
+    },
+    "PROBE_BASE_INTIMACY": {
+      "tier": "tier_4_intimacy",
+      "priority": 11,
+      "question": "How would you characterize the emotional pacing of the relationship compared to your typical baseline, including exclusivity, shared travel, or comfort around your established social circle?"
+    },
+    "PROBE_IA_COHABITATION": {
+      "tier": "tier_4_intimacy",
+      "priority": 29,
+      "question": "Has the progression of emotional commitment or pressure for shared lodging, keys, or travel felt noticeably accelerated compared to typical relationship baselines?"
+    },
+    "PROBE_IA_ISOLATION": {
+      "tier": "tier_4_intimacy",
+      "priority": 30,
+      "question": "Has your partner shown reluctance to interact with your established family and trusted advisors, or subtly discouraged you from sharing details of the relationship with them?"
+    },
+    "PROBE_BASE_TECHNICAL": {
+      "tier": "tier_5_technical",
+      "priority": 15,
+      "question": "From an operational security perspective, has your partner ever had unmonitored proximity to your corporate phone, laptop, credentials, workspace, or asked to connect cables or peripherals?"
+    },
+    "PROBE_TP_DEVICES": {
+      "tier": "tier_5_technical",
+      "priority": 40,
+      "question": "Has your partner ever had unmonitored physical access to your corporate smartphone, laptop, credentials, or physical office space?"
+    },
+    "PROBE_TP_PERIPHERALS": {
+      "tier": "tier_5_technical",
+      "priority": 39,
+      "question": "Have they ever asked to charge a device via your corporate laptop, plug in a USB drive or cable, or gifted electronic peripherals for your home or office?"
+    },
+    "PROBE_TP_CREDENTIALS": {
+      "tier": "tier_5_technical",
+      "priority": 38,
+      "question": "Have they shown curiosity around device passcodes, MFA hardware tokens, Wi-Fi passwords, or watched closely while you unlocked corporate devices?"
+    },
+    "PROBE_TP_QUARTERS": {
+      "tier": "tier_5_technical",
+      "priority": 35,
+      "question": "Have they ever asked to leave luggage, bags, or electronic items unattended in your hotel suite, residence, or private study?"
+    },
+    "PROBE_BASE_FINANCIAL": {
+      "tier": "tier_6_financial",
+      "priority": 9,
+      "question": "Finally, to distinguish financial opportunism from intelligence risk, have there been unusual claims of private wealth, sudden liquidity emergencies, or requests for wires, loans, crypto investments, or expensive gifts?"
+    },
+    "PROBE_FF_CRISIS": {
+      "tier": "tier_6_financial",
+      "priority": 32,
+      "question": "Have their financial claims been accompanied by sudden urgent crises such as frozen accounts, customs fees, or stranded travel requiring your assistance?"
+    },
+    "PROBE_FF_TRANSFERS": {
+      "tier": "tier_6_financial",
+      "priority": 34,
+      "question": "Have they requested direct wire transfers, loans, cryptocurrency platform deposits, or access to financial accounts, and separately, have they ever shown interest in your corporate proprietary work?"
+    }
+  },
+  "dynamic_followup_rules": [
+    {
+      "rule_id": "RULE_TRANSIENT_MEETING",
+      "trigger_indicators": ["AV-01", "AV-02"],
+      "vector_label": "Targeted approach within a recognized high-collection environment",
+      "next_action": "Verify travel publicity overlap and partner presence justification before evaluating background legend.",
+      "priority_probes": ["PROBE_AV_ITINERARY", "PROBE_AV_JUSTIFICATION"]
+    },
+    {
+      "rule_id": "RULE_SHALLOW_LEGEND",
+      "trigger_indicators": ["LV-01", "LV-02"],
+      "vector_label": "Shallow, low-verifiability commercial cover identity (legend)",
+      "next_action": "Probe corporate registration, institutional footprint, and verifiable long-term third-party contacts.",
+      "priority_probes": ["PROBE_LV_FOOTPRINT", "PROBE_LV_ASSOCIATES"]
+    },
+    {
+      "rule_id": "RULE_COVERT_ELICITATION",
+      "trigger_indicators": ["IE-01", "IE-02", "IE-03"],
+      "vector_label": "Exploitation of catharsis, ego validation, and covert information extraction",
+      "next_action": "Probe specific elicitation techniques (flattery, feigned ignorance, provocative claims) and entity naming queries.",
+      "priority_probes": ["PROBE_IE_TACTICS", "PROBE_IE_SPECIFICS"]
+    },
+    {
+      "rule_id": "RULE_TECHNICAL_EXPOSURE",
+      "trigger_indicators": ["TP-01", "TP-02", "TP-03"],
+      "vector_label": "Vector for physical data exfiltration, credential observation, or mobile spyware deployment",
+      "next_action": "Immediately audit physical device proximity, USB peripheral contact, and corporate MDM status.",
+      "priority_probes": ["PROBE_TP_DEVICES", "PROBE_TP_PERIPHERALS", "PROBE_TP_CREDENTIALS"]
+    },
+    {
+      "rule_id": "RULE_COMMERCIAL_FRAUD",
+      "trigger_indicators": ["FF-02", "FF-03"],
+      "vector_label": "Financial opportunism or structured commercial romance fraud",
+      "next_action": "Confirm financial request mechanics while verifying absence of targeted corporate espionage collection.",
+      "priority_probes": ["PROBE_FF_TRANSFERS", "PROBE_BASE_ELICITATION"]
+    }
+  ],
+  "countermeasures": {
+    "tier_1_benign": {
+      "posture_summary": "Indicators align with standard organic relationship dynamics. No signs of targeted human intelligence collection or commercial fraud were identified.",
+      "phases": [
+        {
+          "phase": "Executive Security Hygiene",
+          "action": "Maintain routine corporate compartmentalization by keeping confidential board materials, unannounced M&A details, and technical roadmaps strictly separate from personal conversations.",
+          "objective": "Preserves baseline insider-threat discipline without creating artificial interpersonal friction."
+        },
+        {
+          "phase": "Device Baseline Discipline",
+          "action": "Keep corporate smartphones and laptops locked with biometric/strong alphanumeric authentication and avoid sharing hardware credentials with any personal contacts.",
+          "objective": "Upholds corporate mobile device management (MDM) compliance across all personal environments."
+        },
+        {
+          "phase": "Periodic Reassessment",
+          "action": "Re-evaluate objectively only if material anomalies later emerge, such as sudden financial solicitations or persistent inquiries into proprietary corporate secrets.",
+          "objective": "Maintains proportionate vigilance without encouraging unnecessary suspicion."
+        }
+      ]
+    },
+    "tier_2_commercial_fraud": {
+      "posture_summary": "Indicators point toward commercial romance fraud or financial opportunism rather than state or corporate counterintelligence collection.",
+      "phases": [
+        {
+          "phase": "Immediate Financial Firewall",
+          "action": "Decline all wire transfers, bridge loans, cryptocurrency investments, gift card purchases, or co-signed financial instruments immediately and without exception.",
+          "objective": "Eliminates direct financial loss and prevents escalation into extortion or secondary fraud."
+        },
+        {
+          "phase": "Independent Identity Verification",
+          "action": "Engage a vetted executive protection advisor or licensed corporate investigator to corroborate claimed employment, residence, and corporate registrations before any further personal investment.",
+          "objective": "Establishes objective ground truth outside the partner's self-reported narrative."
+        },
+        {
+          "phase": "Reputational and Asset Protection",
+          "action": "Audit shared messages, photos, and personal banking security; notify legal or personal wealth advisors if sensitive financial details or credentials were previously shared.",
+          "objective": "Contains potential follow-on blackmail, impersonation, or account takeover attempts."
+        },
+        {
+          "phase": "Controlled Disengagement",
+          "action": "Cease financial support calmly and disengage cleanly without dramatic confrontation, preserving all communications privately in case formal fraud reporting becomes necessary.",
+          "objective": "Reduces retaliation risk while maintaining evidentiary records."
+        }
+      ]
+    },
+    "tier_3_ci_honeypot": {
+      "posture_summary": "Multiple cross-tier indicators align with targeted human intelligence (HUMINT) or corporate espionage tradecraft. Immediate non-confrontational containment is warranted.",
+      "phases": [
+        {
+          "phase": "Immediate Posture (Behavioral Continuity)",
+          "action": "Maintain normal, calm behavioral continuity without confronting the partner, accusing them of espionage, or abruptly terminating contact.",
+          "objective": "Prevents alerting handler networks and avoids triggering asset extraction, evidence destruction, or immediate leverage deployment."
+        },
+        {
+          "phase": "Information Control (Canary Protocol)",
+          "action": "Cease all discussion of real proprietary initiatives and, only if coordinated with corporate security leadership, deploy a benign, slightly altered Canary detail to detect unauthorized onward transmission.",
+          "objective": "Verifies active intelligence collection passively without risking real corporate harm."
+        },
+        {
+          "phase": "Technical Isolation and MDM Audit",
+          "action": "Submit corporate smartphones, laptops, and hardware tokens discreetly to the corporate security team for offline forensic inspection; silently rotate corporate passwords and MFA credentials from an uncompromised device; discontinue use of any gifted cables or electronics.",
+          "objective": "Neutralizes potential spyware payloads, compromised USB peripherals, or lateral corporate network access."
+        },
+        {
+          "phase": "Privileged Formal Escalation",
+          "action": "Brief the Chief Security Officer (CSO) and Corporate General Counsel under strict attorney-client privilege to coordinate insider-threat defense and external liaison if sovereign intelligence involvement is indicated.",
+          "objective": "Mobilizes institutional counterintelligence protections while preserving executive legal and reputational safeguards."
+        }
+      ]
+    }
+  },
+  "canary_protocols": {
+    "ma_strategy": {
+      "domain_label": "Corporate M&A and Deal Strategy",
+      "applicable_indicators": ["IE-01", "IE-06"],
+      "script": "During a casual conversation when work arises naturally, mention a strictly benign, non-material scheduling inaccuracy—for example, stating that an internal portfolio review committee moved from Thursday to a non-existent regional retreat next month—using a distinct synthetic internal label agreed with your CSO.",
+      "observation_criteria": "Monitor whether that unique synthetic label or distorted review timing resurfaces via external analysts, competitor chatter, unusual partner follow-up queries, or targeted spear-phishing.",
+      "safety_guardrail": "Never plant fabricated material non-public information (MNPI) that could violate securities law or cause market distortion; coordinate any deployment with Corporate General Counsel."
+    },
+    "technical_roadmap": {
+      "domain_label": "Proprietary Technology and R&D Roadmaps",
+      "applicable_indicators": ["IE-02", "IE-04", "TP-02"],
+      "script": "Reference a harmless, non-operational codename for a routine legacy testing bench (for example, shifting a mock supplier evaluation city to an unused location) without exposing real engineering specifications.",
+      "observation_criteria": "Watch for unsolicited partner follow-up questions probing that exact synthetic codename or external competitor inquiries referencing the planted city.",
+      "safety_guardrail": "Ensure the planted detail contains zero real intellectual property, architecture secrets, or export-controlled data."
+    },
+    "board_governance": {
+      "domain_label": "Board Governance and Executive Leadership",
+      "applicable_indicators": ["IE-01", "IE-03", "IE-05"],
+      "script": "Mention a minor, completely non-sensitive logistical detail regarding a hypothetical off-cycle committee sub-meeting date that does not exist on the official board calendar.",
+      "observation_criteria": "Note whether the partner later asks targeted questions anchored to that non-existent sub-meeting or attempts to learn which directors will attend.",
+      "safety_guardrail": "Avoid naming real third-party directors or fabricating governance disputes that could create internal reputational harm."
+    },
+    "procurement_supply_chain": {
+      "domain_label": "Sovereign Procurement and Supply Chain",
+      "applicable_indicators": ["IE-02", "IE-06"],
+      "script": "Casually reference a benign, non-binding change to an internal administrative review location or mock logistics hub label that carries zero contracting impact.",
+      "observation_criteria": "Monitor whether external vendors, lobbyists, or the partner subsequently display awareness of the synthetic hub label.",
+      "safety_guardrail": "Never disclose or falsify official procurement bids, tender criteria, or regulatory compliance statements."
+    },
+    "general_operations": {
+      "domain_label": "General Executive Operations",
+      "applicable_indicators": [],
+      "script": "Share a completely benign, uniquely phrased detail regarding an upcoming non-sensitive travel stopover or minor administrative agenda shift known to no one else.",
+      "observation_criteria": "Track whether the partner unexpectedly probes that specific stopover or whether coincidental third-party encounters occur at the synthetic location.",
+      "safety_guardrail": "Keep all Canary deployments strictly passive, non-damaging, and aligned with corporate security oversight."
+    }
+  },
+  "legal_disclaimer": "OPERATIONAL AND LEGAL DISCLAIMER: This diagnostic report provides structured behavioral risk modeling derived from established counterintelligence and fraud-prevention frameworks. It does not constitute legal advice, a formal background investigation, law enforcement intelligence, or psychological counseling. Do not confront a suspected operative unilaterally. Consult your Chief Security Officer (CSO) and Corporate General Counsel under appropriate legal privilege before acting on elevated findings."
+}

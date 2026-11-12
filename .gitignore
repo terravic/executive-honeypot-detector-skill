@@ -1,0 +1,56 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.Python
+develop-eggs/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+.installed.cfg
+*.egg
+
+# --- Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# --- Testing & Coverage ---
+.pytest_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- Secrets & Credentials ---
+.env
+.env.*
+!.env.example
+*credentials*.json
+*.pem
+*.key
+
+# --- Ephemeral Sessions, Logs & Scratch Output ---
+*.log
+scratch/
+tmp/
+
+# --- OS & Editor Files ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

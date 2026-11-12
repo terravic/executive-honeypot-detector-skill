@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "description": "Synthetic placeholder test scenarios for counterintelligence honeypot diagnostics.",
+    "compliance_note": "Uses exclusively placeholder names, RFC 2606 .invalid domains, RFC 5737 TEST-NET-1 IPs, and FCC 555-01xx fictitious telephone ranges."
+  },
+  "scenarios": [
+    {
+      "id": "scenario_a_benign",
+      "label": "Benign Organic Alumni Relationship",
+      "risk_profile": "standard",
+      "expected_classification": "tier_1_benign",
+      "min_expected_posterior": 0.85,
+      "expected_confidence_level": "high",
+      "turns": [
+        {
+          "narrative": "Executive-Alpha met Partner-A at a local university alumni association event in their home city for years. I approached her after a panel and we had ordinary small talk with no unusual coincidences.",
+          "observations": [
+            {"id": "AV-01", "status": "absent", "confidence": 0.90},
+            {"id": "AV-03", "status": "absent", "confidence": 0.85},
+            {"id": "AV-05", "status": "absent", "confidence": 0.85}
+          ]
+        },
+        {
+          "narrative": "Partner-A has a verifiable 12-year career at a regional hospital public directory. I met her parents and college friends last month and all biographical details align with her decade-long professional network history.",
+          "observations": [
+            {"id": "LV-01", "status": "absent", "confidence": 0.95},
+            {"id": "LV-02", "status": "absent", "confidence": 0.95},
+            {"id": "LV-03", "status": "absent", "confidence": 0.95}
+          ]
+        },
+        {
+          "narrative": "She shows zero interest in my corporate M&A pipeline or board meetings, avoids talking shop, and never asks for names or codes.",
+          "observations": [
+            {"id": "IE-01", "status": "absent", "confidence": 0.95},
+            {"id": "IE-02", "status": "absent", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "Our relationship has had normal pacing with gradual progression over eight months, balanced reciprocity, separate residences, and she is supportive of my advisors and friends.",
+          "observations": [
+            {"id": "IA-01", "status": "absent", "confidence": 0.90},
+            {"id": "IA-04", "status": "absent", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "She has never had unmonitored access to my corporate phone or laptop, never connected any USB peripheral, never asked for passcodes, and never asked for money or loans.",
+          "observations": [
+            {"id": "TP-01", "status": "absent", "confidence": 0.95},
+            {"id": "TP-02", "status": "absent", "confidence": 0.95},
+            {"id": "FF-03", "status": "absent", "confidence": 0.95}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scenario_b_commercial_fraud",
+      "label": "Commercial Romance Fraud and Crypto Wire Solicitation",
+      "risk_profile": "standard",
+      "expected_classification": "tier_2_commercial_fraud",
+      "min_expected_posterior": 0.80,
+      "turns": [
+        {
+          "narrative": "Partner-B reached out first via an online luxury collectors network out of the blue and initiated contact unprompted.",
+          "observations": [
+            {"id": "AV-05", "status": "present", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "He claims an opaque family fortune and inherited gemstones plus an offshore trust, works as an independent consultant with zero corporate footprint, and has a brand new profile while declining introducing family.",
+          "observations": [
+            {"id": "LV-01", "status": "present", "confidence": 0.85},
+            {"id": "LV-02", "status": "present", "confidence": 0.85},
+            {"id": "LV-03", "status": "present", "confidence": 0.90},
+            {"id": "FF-01", "status": "present", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "He told me he loved me after ten days, shared a dramatic sob story immediately, and accused me of not trusting him when I asked basic questions.",
+          "observations": [
+            {"id": "IA-01", "status": "present", "confidence": 0.95},
+            {"id": "IA-03", "status": "present", "confidence": 0.85},
+            {"id": "IA-05", "status": "present", "confidence": 0.85}
+          ]
+        },
+        {
+          "narrative": "Last week he experienced a sudden customs crisis and frozen bank account, asking me for a wire transfer of $75,000 and pitching a cryptocurrency trading platform investment.",
+          "observations": [
+            {"id": "FF-02", "status": "present", "confidence": 0.95},
+            {"id": "FF-03", "status": "present", "confidence": 0.95}
+          ]
+        },
+        {
+          "narrative": "Importantly, he shows zero interest in my corporate work or M&A, never probes technical details, and has never touched my corporate phone or laptop since we have not shared physical office spaces.",
+          "observations": [
+            {"id": "IE-01", "status": "absent", "confidence": 0.95},
+            {"id": "IE-02", "status": "absent", "confidence": 0.95},
+            {"id": "TP-01", "status": "absent", "confidence": 0.95},
+            {"id": "TP-02", "status": "absent", "confidence": 0.95}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scenario_c_ci_honeypot",
+      "label": "Advanced Counterintelligence Honeypot Operation",
+      "risk_profile": "high_exposure",
+      "expected_classification": "tier_3_ci_honeypot",
+      "min_expected_posterior": 0.85,
+      "expected_canary_recommended": true,
+      "turns": [
+        {
+          "narrative": "Executive-Gamma met Partner-C unexpectedly at a hotel bar during an overseas aerospace summit in Geneva. My keynote itinerary was publicized online beforehand. She approached me unprompted and happened to love the exact same obscure collector hobby.",
+          "observations": [
+            {"id": "AV-01", "status": "present", "confidence": 0.95},
+            {"id": "AV-02", "status": "present", "confidence": 0.90},
+            {"id": "AV-03", "status": "present", "confidence": 0.85},
+            {"id": "AV-05", "status": "present", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "She gave an unclear explanation for attending the hotel and was not registered with the conference. She works in international art logistics with private clients only, zero corporate footprint, a thin digital footprint, and I have never met any family or childhood friends.",
+          "observations": [
+            {"id": "AV-06", "status": "present", "confidence": 0.90},
+            {"id": "LV-01", "status": "present", "confidence": 0.95},
+            {"id": "LV-02", "status": "present", "confidence": 0.95},
+            {"id": "LV-03", "status": "present", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "She uses flattery and encourages me to share board disputes to decompress, persistently steers conversations toward our unannounced acquisition targets and technical roadmap, pretends technical ignorance to make me explain step by step, and presses for names and project codenames.",
+          "observations": [
+            {"id": "IE-01", "status": "present", "confidence": 0.95},
+            {"id": "IE-02", "status": "present", "confidence": 0.90},
+            {"id": "IE-03", "status": "present", "confidence": 0.90},
+            {"id": "IE-04", "status": "present", "confidence": 0.90},
+            {"id": "IE-06", "status": "present", "confidence": 0.95}
+          ]
+        },
+        {
+          "narrative": "She expressed premature declarations of love within two weeks, pushed to stay at my apartment immediately, and discourages me from telling my colleagues or advisors.",
+          "observations": [
+            {"id": "IA-01", "status": "present", "confidence": 0.90},
+            {"id": "IA-02", "status": "present", "confidence": 0.85},
+            {"id": "IA-04", "status": "present", "confidence": 0.90}
+          ]
+        },
+        {
+          "narrative": "Yesterday she picked up my corporate smartphone thinking it was hers, asked to charge her phone on my laptop via USB, and watched me type my PIN. She has never asked for money or wire transfers.",
+          "observations": [
+            {"id": "TP-01", "status": "present", "confidence": 0.95},
+            {"id": "TP-02", "status": "present", "confidence": 0.95},
+            {"id": "TP-03", "status": "present", "confidence": 0.90},
+            {"id": "FF-03", "status": "absent", "confidence": 0.95}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scenario_d_incomplete",
+      "label": "Early Termination with Single Soft Indicator",
+      "risk_profile": "standard",
+      "expected_insufficient_data": true,
+      "expected_confidence_level": "low",
+      "turns": [
+        {
+          "narrative": "We met briefly at a hotel lounge during an industry conference overseas last week, and we have only exchanged two polite messages since then.",
+          "observations": [
+            {"id": "AV-01", "status": "present", "confidence": 0.75}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scenario_e_opsec_redaction",
+      "label": "OPSEC Redaction and Synthetic PII Scrubbing Test",
+      "risk_profile": "standard",
+      "sensitive_terms": ["Avery Placeholder", "Apex Synthetic Corp"],
+      "forbidden_output_tokens": [
+        "Avery Placeholder",
+        "Apex Synthetic Corp",
+        "synthetic.exec@example.invalid",
+        "555-0199",
+        "000-00-0000",
+        "192.0.2.42",
+        "SYNTHETIC999"
+      ],
+      "turns": [
+        {
+          "narrative": "Avery Placeholder met me near the hotel lounge during an overseas summit for Apex Synthetic Corp. She emailed synthetic.exec@example.invalid, called 555-0199 from 192.0.2.42, referenced mock ID 000-00-0000, and sent https://portal.example.invalid/auth?token=SYNTHETIC999.",
+          "observations": []
+        }
+      ]
+    }
+  ]
+}

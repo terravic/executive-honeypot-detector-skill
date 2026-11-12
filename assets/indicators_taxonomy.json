@@ -1,0 +1,782 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_name": "Counterintelligence and Executive Romance Threat Taxonomy",
+  "hypotheses": [
+    {
+      "id": "tier_1_benign",
+      "label": "Tier 1: Benign / Organic Relationship",
+      "description": "Standard interpersonal dynamics with verifiable background, normal relationship pacing, and negligible espionage or fraud risk."
+    },
+    {
+      "id": "tier_2_commercial_fraud",
+      "label": "Tier 2: Commercial Fraud / Romance Scam",
+      "description": "Financial opportunism or organized consumer romance fraud characterized by monetary extraction tactics without targeted corporate intelligence collection."
+    },
+    {
+      "id": "tier_3_ci_honeypot",
+      "label": "Tier 3: Advanced CI Threat / Honeypot",
+      "description": "Probable foreign intelligence service (FIS) asset or corporate espionage operation targeting executive access, proprietary data, or hardware compromise."
+    }
+  ],
+  "prior_profiles": {
+    "standard": {
+      "tier_1_benign": 0.72,
+      "tier_2_commercial_fraud": 0.16,
+      "tier_3_ci_honeypot": 0.12
+    },
+    "high_exposure": {
+      "tier_1_benign": 0.55,
+      "tier_2_commercial_fraud": 0.18,
+      "tier_3_ci_honeypot": 0.27
+    }
+  },
+  "tiers": [
+    {
+      "id": "tier_1_approach",
+      "label": "Tier 1: Approach Vector",
+      "priority": 1,
+      "core_ci_tier": true,
+      "baseline_probe_id": "PROBE_BASE_APPROACH"
+    },
+    {
+      "id": "tier_2_legend",
+      "label": "Tier 2: Legend and Verification",
+      "priority": 2,
+      "core_ci_tier": true,
+      "baseline_probe_id": "PROBE_BASE_LEGEND"
+    },
+    {
+      "id": "tier_3_elicitation",
+      "label": "Tier 3: Information Elicitation",
+      "priority": 3,
+      "core_ci_tier": true,
+      "baseline_probe_id": "PROBE_BASE_ELICITATION"
+    },
+    {
+      "id": "tier_4_intimacy",
+      "label": "Tier 4: Intimacy Acceleration",
+      "priority": 4,
+      "core_ci_tier": true,
+      "baseline_probe_id": "PROBE_BASE_INTIMACY"
+    },
+    {
+      "id": "tier_5_technical",
+      "label": "Tier 5: Technical Proximity",
+      "priority": 5,
+      "core_ci_tier": true,
+      "baseline_probe_id": "PROBE_BASE_TECHNICAL"
+    },
+    {
+      "id": "tier_6_financial",
+      "label": "Tier 6: Commercial and Financial Exploitation",
+      "priority": 6,
+      "core_ci_tier": false,
+      "baseline_probe_id": "PROBE_BASE_FINANCIAL"
+    }
+  ],
+  "indicators": [
+    {
+      "id": "AV-01",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 1: Spotting and Targeting",
+      "name": "High-Value Transient Venue Contact",
+      "description": "Initial meeting occurred unexpectedly at a high-collection transient location frequented during executive business travel (international hotel lounge, industry summit, private airport club, overseas symposium).",
+      "severity_weight": 2.5,
+      "likelihoods": {
+        "tier_1_benign": 0.18,
+        "tier_2_commercial_fraud": 0.22,
+        "tier_3_ci_honeypot": 0.78
+      },
+      "positive_patterns": [
+        "\\bhotel\\s+(?:bar|lounge|lobby)\\b",
+        "\\b(?:conference|summit|symposium|forum|trade\\s+show)\\b.*\\b(?:overseas|geneva|zurich|davos|london|singapore|dubai|international|abroad)\\b",
+        "\\b(?:overseas|international|abroad)\\b.*\\b(?:conference|summit|symposium|hotel|flight|lounge)\\b",
+        "\\b(?:airport|transit|executive|private)\\s+lounge\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:alumni\\s+(?:event|association|network)|local\\s+(?:charity|book\\s+club|community)|mutual\\s+(?:colleague|friend)\\s+introduced|home\\s+city\\s+for\\s+years)\\b"
+      ],
+      "followup_probe_id": "PROBE_AV_ITINERARY",
+      "dynamic_action": "Verify whether executive travel itinerary, speaking engagements, or hotel venue were publicized beforehand."
+    },
+    {
+      "id": "AV-02",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 1: Spotting and Targeting",
+      "name": "Publicized Itinerary Overlap",
+      "description": "Executive's attendance, travel dates, keynote appearance, or lodging location was publicly announced or visible across professional networks prior to contact.",
+      "severity_weight": 2.8,
+      "likelihoods": {
+        "tier_1_benign": 0.20,
+        "tier_2_commercial_fraud": 0.25,
+        "tier_3_ci_honeypot": 0.80
+      },
+      "positive_patterns": [
+        "\\b(?:publicized|announced|listed\\s+on\\s+the\\s+agenda|keynote\\s+speaker|press\\s+release|professional\\s+network\\s+post|shared\\s+my\\s+travel)\\b",
+        "\\b(?:itinerary|schedule|attendance|hotel\\s+location)\\s+(?:was\\s+)?(?:public|online|posted|shared)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:unannounced\\s+(?:trip|visit|travel|itinerary|attendance)|last[- ]minute\\s+trip|not\\s+publicized|private\\s+unlisted\\s+visit|nobody\\s+knew\\s+i\\s+was\\s+there)\\b"
+      ],
+      "followup_probe_id": "PROBE_AV_JUSTIFICATION",
+      "dynamic_action": "Assess whether partner had an independently verifiable reason to occupy the same venue at the same time."
+    },
+    {
+      "id": "AV-03",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Engineered Serendipity and Niche Alignment",
+      "description": "Immediate, statistically improbable alignment on obscure personal hobbies, rare literature, specialized art, or private niche interests during initial interaction.",
+      "severity_weight": 3.0,
+      "likelihoods": {
+        "tier_1_benign": 0.12,
+        "tier_2_commercial_fraud": 0.35,
+        "tier_3_ci_honeypot": 0.76
+      },
+      "positive_patterns": [
+        "\\b(?:obscure|niche|rare|unusual|very\\s+specific)\\s+(?:hobby|hobbies|interest|interests|book|author|literature|collector|wine|sport)\\b",
+        "\\b(?:uncanny|serendipitous|improbable|instant)\\s+(?:alignment|coincidence|match|connection)\\b",
+        "\\bhappened\\s+to\\s+(?:read|love|collect|study)\\s+the\\s+exact\\s+same\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:different\\s+hobbies|ordinary\\s+small\\s+talk|no\\s+unusual\\s+coincidences|gradually\\s+discovered\\s+shared\\s+interests)\\b"
+      ],
+      "followup_probe_id": "PROBE_AV_CONTEXT",
+      "dynamic_action": "Evaluate whether personal interests could have been harvested from executive bios, podcasts, or social profiles."
+    },
+    {
+      "id": "AV-04",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Pre-Existing Familiarity with Executive Context",
+      "description": "Partner demonstrated subtle prior awareness of executive's industry niche, career history, recent corporate stress, or personal transitions without prior disclosure.",
+      "severity_weight": 3.4,
+      "likelihoods": {
+        "tier_1_benign": 0.08,
+        "tier_2_commercial_fraud": 0.30,
+        "tier_3_ci_honeypot": 0.75
+      },
+      "positive_patterns": [
+        "\\b(?:already\\s+knew|seemed\\s+familiar\\s+with|surprisingly\\s+informed\\s+about)\\b.*\\b(?:career|company|industry|divorce|board|role|background)\\b",
+        "\\b(?:referenced|mentioned)\\s+(?:my\\s+)?(?:recent\\s+reorg|previous\\s+company|divorce|old\\s+interview)\\s+before\\s+i\\s+(?:told|mentioned)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:had\\s+no\\s+idea\\s+who\\s+i\\s+was|did\\s+not\\s+know\\s+my\\s+role|unfamiliar\\s+with\\s+my\\s+company)\\b"
+      ],
+      "followup_probe_id": "PROBE_AV_ITINERARY",
+      "dynamic_action": "Cross-check for pre-approach target profiling and open-source dossier assembly."
+    },
+    {
+      "id": "AV-05",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Unprompted Partner-Initiated Contact",
+      "description": "Partner actively initiated conversation or online contact unprompted using an engineered pretext or flattering opener.",
+      "severity_weight": 1.8,
+      "likelihoods": {
+        "tier_1_benign": 0.32,
+        "tier_2_commercial_fraud": 0.72,
+        "tier_3_ci_honeypot": 0.80
+      },
+      "positive_patterns": [
+        "\\b(?:she|he|partner|they)\\s+(?:approached\\s+me|initiated\\s+contact|struck\\s+up\\s+a\\s+conversation|reached\\s+out\\s+first|messaged\\s+me\\s+out\\s+of\\s+the\\s+blue)\\b",
+        "\\bunprompted\\s+(?:introduction|approach|message|conversation)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:i\\s+approached\\s+(?:her|him|them)|introduced\\s+by\\s+a\\s+(?:trusted|mutual|long[- ]time)\\s+(?:friend|colleague))\\b"
+      ],
+      "followup_probe_id": "PROBE_AV_JUSTIFICATION",
+      "dynamic_action": "Probe the stated pretext and persistence of the initial approach."
+    },
+    {
+      "id": "AV-06",
+      "tier": "tier_1_approach",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Implausible Venue Presence Justification",
+      "description": "Partner lacked a clear, independently verifiable professional or personal reason for attending the venue or traveling to the city.",
+      "severity_weight": 3.5,
+      "likelihoods": {
+        "tier_1_benign": 0.06,
+        "tier_2_commercial_fraud": 0.32,
+        "tier_3_ci_honeypot": 0.74
+      },
+      "positive_patterns": [
+        "\\b(?:vague|unclear|implausible|odd|evasive)\\s+(?:reason|excuse|explanation)\\s+(?:for\\s+being\\s+there|for\\s+attending|for\\s+traveling)\\b",
+        "\\bnot\\s+(?:registered|on\\s+the\\s+attendee\\s+list|affiliated\\s+with\\s+the\\s+conference)\\b",
+        "\\b(?:just\\s+passing\\s+through|spontaneous\\s+trip|could\\s+not\\s+name\\s+their\\s+client)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:registered\\s+(?:attendee|panelist)|works\\s+locally\\s+in|verified\\s+employer\\s+headquartered\\s+there)\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_FOOTPRINT",
+      "dynamic_action": "Transition immediately to legend and institutional footprint verification."
+    },
+    {
+      "id": "LV-01",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Shallow Low-Verifiability Cover Career",
+      "description": "Claims employment in opaque, high-mobility roles such as international art logistics, independent consulting, private family office advisory, or import/export with remote private clients.",
+      "severity_weight": 3.2,
+      "likelihoods": {
+        "tier_1_benign": 0.09,
+        "tier_2_commercial_fraud": 0.62,
+        "tier_3_ci_honeypot": 0.78
+      },
+      "positive_patterns": [
+        "\\b(?:international\\s+art\\s+logistics|art\\s+dealer|independent\\s+consultant|import[/ ]export|private\\s+wealth\\s+advisor|family\\s+office|freelance\\s+advisory|private\\s+clients\\s+only|gemstone|offshore\\s+broker)\\b",
+        "\\b(?:mostly\\s+remote|travel[- ]heavy|self[- ]employed)\\b.*\\b(?:private\\s+clients|confidential\\s+clients|nda)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:verifiable\\s+(?:\\d+[- ]year\\s+)?career|works\\s+at\\s+(?:a\\s+)?(?:regional\\s+hospital|public\\s+company|university|established\\s+firm)|tenured|publicly\\s+listed\\s+directory)\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_FOOTPRINT",
+      "dynamic_action": "Probe institutional footprint, corporate registration, and verifiable career references."
+    },
+    {
+      "id": "LV-02",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Zero Verifiable Institutional Footprint",
+      "description": "Claimed employer, consultancy, or academic credential has no physical office, verifiable corporate registry, or public institutional record.",
+      "severity_weight": 3.8,
+      "likelihoods": {
+        "tier_1_benign": 0.04,
+        "tier_2_commercial_fraud": 0.68,
+        "tier_3_ci_honeypot": 0.80
+      },
+      "positive_patterns": [
+        "\\b(?:no|zero)\\s+(?:physical\\s+office|corporate\\s+footprint|institutional\\s+footprint|verifiable\\s+employer|public\\s+record)\\b",
+        "\\b(?:company|firm|consultancy)\\s+(?:does\\s+not\\s+exist|has\\s+no\\s+website|cannot\\s+be\\s+verified|no\\s+online\\s+profile|unregistered)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:verifiable\\s+(?:multi[- ]year\\s+)?(?:institutional|corporate)\\s+footprint|confirmed\\s+employer|met\\s+(?:at|near)\\s+(?:her|his|their)\\s+office|public\\s+hospital\\s+administration)\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_ASSOCIATES",
+      "dynamic_action": "Probe for verifiable long-term personal contacts, family members, or independent references."
+    },
+    {
+      "id": "LV-03",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Absence of Verifiable Long-Term Associates or Family",
+      "description": "Executive has never met any verifiable childhood friends, former colleagues, or direct family members in person, or partner provides excuses preventing introductions.",
+      "severity_weight": 3.4,
+      "likelihoods": {
+        "tier_1_benign": 0.14,
+        "tier_2_commercial_fraud": 0.72,
+        "tier_3_ci_honeypot": 0.78
+      },
+      "positive_patterns": [
+        "\\b(?:never\\s+met|no\\s+verifiable|zero\\s+contact\\s+with)\\s+(?:any\\s+)?(?:family|parents|siblings|childhood\\s+friends|long[- ]term\\s+(?:friends|contacts|colleagues))\\b",
+        "\\b(?:avoids|declines|makes\\s+excuses)\\b.*\\b(?:introducing\\s+(?:family|friends)|video\\s+call\\s+with\\s+family)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:met\\s+(?:her|his|their)\\s+(?:parents|family|brother|sister|lifelong\\s+friends|college\\s+friends|colleagues)|introduced\\s+me\\s+to\\s+(?:family|lifelong\\s+friends))\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_TIMELINE",
+      "dynamic_action": "Evaluate depth of biographical anchors and check for fabricated backstory inconsistencies."
+    },
+    {
+      "id": "LV-04",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Thin or Freshly Fabricated Digital History",
+      "description": "Social or professional digital footprint is absent, unusually sparse for stated age/career, or recently created without historical interactions.",
+      "severity_weight": 3.0,
+      "likelihoods": {
+        "tier_1_benign": 0.14,
+        "tier_2_commercial_fraud": 0.65,
+        "tier_3_ci_honeypot": 0.76
+      },
+      "positive_patterns": [
+        "\\b(?:thin|sparse|non[- ]existent|brand\\s+new|recently\\s+created)\\s+(?:digital\\s+footprint|online\\s+presence|professional\\s+profile|social\\s+media|profile)\\b",
+        "\\bno\\s+(?:online\\s+history|digital\\s+trail|historical\\s+photos|past\\s+posts)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:decade[- ]long\\s+(?:professional\\s+network\\s+history|digital\\s+history)|extensive\\s+verifiable\\s+online\\s+history|published\\s+papers\\s+over\\s+years)\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_ASSOCIATES",
+      "dynamic_action": "Cross-check digital footprint gap against claimed international commercial seniority."
+    },
+    {
+      "id": "LV-05",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 2: Engineered Approach",
+      "name": "Inconsistent Biographical Timeline Details",
+      "description": "Contradictions regarding past cities of residence, university graduation years, former employers, linguistic fluency, or travel history.",
+      "severity_weight": 3.6,
+      "likelihoods": {
+        "tier_1_benign": 0.05,
+        "tier_2_commercial_fraud": 0.70,
+        "tier_3_ci_honeypot": 0.68
+      },
+      "positive_patterns": [
+        "\\b(?:inconsistent|contradictory|shifting|changing)\\s+(?:story|stories|timeline|details|dates|background|history)\\b",
+        "\\b(?:stories\\s+do\\s+not\\s+add\\s+up|changed\\s+(?:her|his|their)\\s+story|contradicted\\s+(?:herself|himself|themselves))\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:consistent\\s+(?:timeline|history|story)|all\\s+biographical\\s+details\\s+align)\\b"
+      ],
+      "followup_probe_id": "PROBE_LV_FOOTPRINT",
+      "dynamic_action": "Document exact contradictions discreetly without confronting the partner."
+    },
+    {
+      "id": "LV-06",
+      "tier": "tier_2_legend",
+      "stage_mapping": "Stage 3: Intimacy Acceleration",
+      "name": "Reluctance to Meet Executive's Social Circle",
+      "description": "Partner consistently avoids group settings with the executive's trusted peers, adult children, security staff, or long-time friends.",
+      "severity_weight": 2.9,
+      "likelihoods": {
+        "tier_1_benign": 0.12,
+        "tier_2_commercial_fraud": 0.66,
+        "tier_3_ci_honeypot": 0.72
+      },
+      "positive_patterns": [
+        "\\b(?:reluctant|refuses|avoids|cancels)\\b.*\\b(?:my\\s+(?:friends|family|colleagues|advisors|circle)|group\\s+dinners)\\b",
+        "\\bprefers\\s+to\\s+keep\\s+(?:us|the\\s+relationship)\\s+(?:secret|completely\\s+private|hidden\\s+from\\s+friends)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:comfortable\\s+with\\s+my\\s+(?:friends|family)|attended\\s+dinner\\s+with\\s+my\\s+(?:friends|colleagues|family))\\b"
+      ],
+      "followup_probe_id": "PROBE_IA_ISOLATION",
+      "dynamic_action": "Probe whether avoidance reflects operational compartmentalization or active isolation tactics."
+    },
+    {
+      "id": "IE-01",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Steering Toward M&A, Governance, or Reorganizations",
+      "description": "Persistent redirection of casual conversations toward unannounced mergers, acquisitions, board disputes, restructuring, or executive succession.",
+      "severity_weight": 4.2,
+      "likelihoods": {
+        "tier_1_benign": 0.05,
+        "tier_2_commercial_fraud": 0.10,
+        "tier_3_ci_honeypot": 0.86
+      },
+      "positive_patterns": [
+        "\\b(?:steers|redirects|steered|asks\\s+repeatedly|persistent\\s+interest)\\b.*\\b(?:m&a|merger|acquisition|board\\s+(?:disputes|politics|votes)|reorganization|restructuring|governance|deal\\s+pipeline)\\b",
+        "\\b(?:unannounced\\s+acquisition|board\\s+disputes|internal\\s+reorganizations|acquisition\\s+targets)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:zero\\s+interest\\s+in\\s+(?:my\\s+work|corporate|m&a|board)|never\\s+asks\\s+about\\s+(?:work|deals|board|proprietary))\\b"
+      ],
+      "followup_probe_id": "PROBE_IE_TACTICS",
+      "dynamic_action": "Assess specific non-interrogative elicitation techniques (flattery, feigned ignorance, provocative statements)."
+    },
+    {
+      "id": "IE-02",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Technical Roadmap or Proprietary IP Probing",
+      "description": "Recurring curiosity regarding confidential product roadmaps, defense/sovereign contracts, proprietary architectures, clinical trials, or R&D milestones.",
+      "severity_weight": 4.3,
+      "likelihoods": {
+        "tier_1_benign": 0.04,
+        "tier_2_commercial_fraud": 0.08,
+        "tier_3_ci_honeypot": 0.84
+      },
+      "positive_patterns": [
+        "\\b(?:technical\\s+roadmap|proprietary\\s+(?:technology|ip|specs|architecture)|r&d\\s+milestones|sovereign\\s+contract|clinical\\s+trial\\s+data|classified\\s+specs|source\\s+code|patent\\s+filing)\\b",
+        "\\basks\\s+(?:detailed|specific)\\s+questions\\s+about\\s+(?:our\\s+)?(?:technology|engineering|roadmap|supply\\s+chain|defense\\s+program)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+probes\\s+technical\\s+details|zero\\s+elicitation\\s+of\\s+proprietary|avoids\\s+talking\\s+shop)\\b"
+      ],
+      "followup_probe_id": "PROBE_IE_TACTICS",
+      "dynamic_action": "Catalog sensitive technical domains targeted and prepare domain-specific Canary Protocol."
+    },
+    {
+      "id": "IE-03",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Flattery and Cathartic Venting Exploitation",
+      "description": "Uses strategic praise, admiration of executive authority, or therapeutic prompting to encourage venting about workplace frustrations and internal friction.",
+      "severity_weight": 3.5,
+      "likelihoods": {
+        "tier_1_benign": 0.14,
+        "tier_2_commercial_fraud": 0.25,
+        "tier_3_ci_honeypot": 0.80
+      },
+      "positive_patterns": [
+        "\\b(?:flattery|flatters\\s+me|encourages\\s+me\\s+to\\s+vent|decompress\\s+about\\s+work|finds\\s+my\\s+corporate\\s+challenges\\s+fascinating|praises\\s+my\\s+brilliance\\s+while\\s+asking)\\b",
+        "\\b(?:vent|share\\s+board\\s+disputes|workplace\\s+friction)\\s+(?:to\\s+decompress|over\\s+drinks)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:does\\s+not\\s+use\\s+flattery\\s+for\\s+work\\s+info|healthy\\s+balanced\\s+conversations|redirects\\s+away\\s+from\\s+office\\s+stress)\\b"
+      ],
+      "followup_probe_id": "PROBE_IE_SPECIFICS",
+      "dynamic_action": "Check whether venting sessions progressively narrow toward named individuals, budgets, or timelines."
+    },
+    {
+      "id": "IE-04",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Feigned Ignorance to Prompt Detailed Explanations",
+      "description": "Pretends naivety or technical ignorance on complex industry topics to induce the executive to over-explain confidential methodologies.",
+      "severity_weight": 3.8,
+      "likelihoods": {
+        "tier_1_benign": 0.08,
+        "tier_2_commercial_fraud": 0.10,
+        "tier_3_ci_honeypot": 0.78
+      },
+      "positive_patterns": [
+        "\\b(?:feigned\\s+ignorance|pretends\\s+(?:complete\\s+)?(?:technical\\s+)?ignorance|plays\\s+dumb|acts\\s+naive)\\b",
+        "\\basks\\s+me\\s+to\\s+explain\\s+(?:step\\s+by\\s+step|in\\s+detail|how\\s+the\\s+system\\s+actually\\s+works)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+feigns\\s+ignorance|no\\s+leading\\s+technical\\s+questions)\\b"
+      ],
+      "followup_probe_id": "PROBE_IE_SPECIFICS",
+      "dynamic_action": "Identify what operational mechanics or proprietary details were elicited during explanations."
+    },
+    {
+      "id": "IE-05",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Provocative or Inaccurate Statements Triggering Correction",
+      "description": "Makes deliberate, subtly wrong or provocative assertions about the executive's organization or competitors to exploit the professional urge to correct errors.",
+      "severity_weight": 4.0,
+      "likelihoods": {
+        "tier_1_benign": 0.06,
+        "tier_2_commercial_fraud": 0.08,
+        "tier_3_ci_honeypot": 0.76
+      },
+      "positive_patterns": [
+        "\\b(?:provocative\\s+(?:statements|assertions|claims)|deliberately\\s+wrong|baiting\\s+me\\s+to\\s+correct|inaccurate\\s+claim\\s+about\\s+my\\s+company)\\b",
+        "\\b(?:gets\\s+details\\s+slightly\\s+wrong\\s+so\\s+i\\s+correct)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+makes\\s+provocative\\s+corporate\\s+claims|no\\s+baiting\\s+questions)\\b"
+      ],
+      "followup_probe_id": "PROBE_IE_SPECIFICS",
+      "dynamic_action": "Flag active counterintelligence elicitation tradecraft and avoid corrective disclosures."
+    },
+    {
+      "id": "IE-06",
+      "tier": "tier_3_elicitation",
+      "stage_mapping": "Stage 4: Covert Elicitation",
+      "name": "Specific Entity, Project Code, or Personnel Queries",
+      "description": "Steers follow-up questions toward exact project codenames, vendor names, target valuations, or vulnerabilities of specific executives and board members.",
+      "severity_weight": 4.5,
+      "likelihoods": {
+        "tier_1_benign": 0.03,
+        "tier_2_commercial_fraud": 0.07,
+        "tier_3_ci_honeypot": 0.85
+      },
+      "positive_patterns": [
+        "\\b(?:project\\s+code(?:name)?s?|exact\\s+valuation|specific\\s+(?:vendor|target\\s+company|board\\s+member)\\s+names|who\\s+is\\s+weakest\\s+on\\s+the\\s+board|exact\\s+closing\\s+date)\\b",
+        "\\b(?:presses\\s+for\\s+names|asks\\s+which\\s+executives\\s+oppose|wants\\s+the\\s+code\\s+name)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+asks\\s+for\\s+names\\s+or\\s+codes|keeps\\s+topics\\s+strictly\\s+general)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_DEVICES",
+      "dynamic_action": "Prioritize immediate technical proximity assessment and Canary Protocol planning."
+    },
+    {
+      "id": "IA-01",
+      "tier": "tier_4_intimacy",
+      "stage_mapping": "Stage 3: Intimacy Acceleration",
+      "name": "Premature Declarations of Love or Exclusivity",
+      "description": "Relationship emotional intensity escalates far faster than normal baselines, including premature declarations of love, destiny, or exclusivity within days or weeks.",
+      "severity_weight": 2.9,
+      "likelihoods": {
+        "tier_1_benign": 0.14,
+        "tier_2_commercial_fraud": 0.82,
+        "tier_3_ci_honeypot": 0.76
+      },
+      "positive_patterns": [
+        "\\b(?:premature\\s+declarations\\s+of\\s+love|declared\\s+love\\s+within\\s+(?:days|a\\s+week|two\\s+weeks)|love[- ]bombing|instant\\s+soulmate|rapid\\s+exclusivity|accelerated\\s+intimacy)\\b",
+        "\\b(?:told\\s+me\\s+(?:she|he|they)\\s+loved\\s+me\\s+after\\s+(?:a\\s+few\\s+days|ten\\s+days|one\\s+week))\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:normal\\s+(?:relationship\\s+)?pacing|gradual\\s+progression\\s+over\\s+(?:months|eight\\s+months)|healthy\\s+measured\\s+pace|no\\s+rushed\\s+declarations)\\b"
+      ],
+      "followup_probe_id": "PROBE_IA_COHABITATION",
+      "dynamic_action": "Evaluate whether emotional acceleration coincides with financial requests or information elicitation."
+    },
+    {
+      "id": "IA-02",
+      "tier": "tier_4_intimacy",
+      "stage_mapping": "Stage 3: Intimacy Acceleration",
+      "name": "Pressure for Rapid Cohabitation or Private Travel",
+      "description": "Early pressure to move in together, share private residences, or join isolated international trips before trust is organically established.",
+      "severity_weight": 3.2,
+      "likelihoods": {
+        "tier_1_benign": 0.08,
+        "tier_2_commercial_fraud": 0.45,
+        "tier_3_ci_honeypot": 0.72
+      },
+      "positive_patterns": [
+        "\\b(?:pressure\\s+(?:for|to)\\s+(?:cohabit|move\\s+in\\s+together|live\\s+together)|wants\\s+keys\\s+to\\s+my\\s+apartment|pushing\\s+to\\s+stay\\s+at\\s+my\\s+home\\s+immediately)\\b",
+        "\\b(?:isolated\\s+overseas\\s+trip|insisted\\s+on\\s+joining\\s+my\\s+business\\s+trip)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:respects\\s+(?:personal\\s+)?boundaries|maintains\\s+separate\\s+residence|no\\s+pressure\\s+to\\s+move\\s+in)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_DEVICES",
+      "dynamic_action": "Assess physical residence security and hardware proximity risks."
+    },
+    {
+      "id": "IA-03",
+      "tier": "tier_4_intimacy",
+      "stage_mapping": "Stage 3: Intimacy Acceleration",
+      "name": "Artificial Reciprocal Vulnerability Disclosure",
+      "description": "Shares intense, curated personal traumas or secrets early to invoke psychological reciprocity and lower executive caution.",
+      "severity_weight": 2.7,
+      "likelihoods": {
+        "tier_1_benign": 0.16,
+        "tier_2_commercial_fraud": 0.70,
+        "tier_3_ci_honeypot": 0.74
+      },
+      "positive_patterns": [
+        "\\b(?:intense\\s+personal\\s+trauma|orchestrated\\s+vulnerability|overshared\\s+deep\\s+secrets\\s+immediately|felt\\s+obligated\\s+to\\s+open\\s+up\\s+in\\s+return)\\b",
+        "\\b(?:dramatic\\s+sob\\s+story|sudden\\s+emotional\\s+confession\\s+on\\s+the\\s+first)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:balanced\\s+reciprocity|natural\\s+gradual\\s+openness|no\\s+theatrical\\s+disclosures)\\b"
+      ],
+      "followup_probe_id": "PROBE_IA_ISOLATION",
+      "dynamic_action": "Determine if emotional reciprocity was followed by sensitive corporate or financial disclosures."
+    },
+    {
+      "id": "IA-04",
+      "tier": "tier_4_intimacy",
+      "stage_mapping": "Stage 3: Intimacy Acceleration",
+      "name": "Isolation from Trusted Advisors or Family",
+      "description": "Subtle or overt efforts to sow distrust toward the executive's colleagues, security advisors, legal counsel, or close family members.",
+      "severity_weight": 3.7,
+      "likelihoods": {
+        "tier_1_benign": 0.05,
+        "tier_2_commercial_fraud": 0.60,
+        "tier_3_ci_honeypot": 0.74
+      },
+      "positive_patterns": [
+        "\\b(?:isolate\\s+me|distance\\s+me\\s+from|sow\\s+distrust|says\\s+my\\s+(?:advisors|family|friends|security\\s+team)\\s+(?:do\\s+not\\s+understand|are\\s+jealous|cannot\\s+be\\s+trusted))\\b",
+        "\\b(?:discourages\\s+me\\s+from\\s+telling\\s+(?:anyone|my\\s+(?:trusted\\s+)?(?:advisors|family|colleagues|friends)))\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:encourages\\s+my\\s+family\\s+relationships|supportive\\s+of\\s+my\\s+advisors\\s+and\\s+friends)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_DEVICES",
+      "dynamic_action": "Identify boundary erosion and recommend reconnecting with trusted personal advisors."
+    },
+    {
+      "id": "IA-05",
+      "tier": "tier_4_intimacy",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Emotional Leverage or Guilt-Inducing Urgency",
+      "description": "Uses emotional withdrawal, dramatic ultimatums, or implied reputational embarrassment to enforce compliance with requests.",
+      "severity_weight": 3.3,
+      "likelihoods": {
+        "tier_1_benign": 0.08,
+        "tier_2_commercial_fraud": 0.74,
+        "tier_3_ci_honeypot": 0.64
+      },
+      "positive_patterns": [
+        "\\b(?:guilt[- ]trip|emotional\\s+(?:blackmail|leverage|ultimatum)|threatens\\s+to\\s+leave\\s+if\\s+i\\s+do\\s+not|accused\\s+me\\s+of\\s+not\\s+trusting)\\b",
+        "\\b(?:compromising\\s+photos|implied\\s+exposure|reputational\\s+leverage)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:no\\s+emotional\\s+pressure|respects\\s+when\\s+i\\s+say\\s+no|zero\\s+ultimatums)\\b"
+      ],
+      "followup_probe_id": "PROBE_FF_CRISIS",
+      "dynamic_action": "Distinguish financial extortion tactics from intelligence kompromat development."
+    },
+    {
+      "id": "TP-01",
+      "tier": "tier_5_technical",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Unmonitored Physical Access to Corporate Devices",
+      "description": "Partner had unsupervised physical proximity to or handled executive's corporate smartphone, laptop, tablet, or physical workspace.",
+      "severity_weight": 4.6,
+      "likelihoods": {
+        "tier_1_benign": 0.07,
+        "tier_2_commercial_fraud": 0.12,
+        "tier_3_ci_honeypot": 0.85
+      },
+      "positive_patterns": [
+        "\\b(?:picked\\s+up\\s+my\\s+(?:corporate\\s+)?(?:smartphone|phone|laptop)|unmonitored\\s+(?:physical\\s+)?access|left\\s+alone\\s+with\\s+my\\s+(?:laptop|smartphone|phone|work\\s+bag)|handled\\s+my\\s+corporate\\s+smartphone)\\b",
+        "\\b(?:went\\s+through\\s+my\\s+(?:smartphone|phone|briefcase|laptop)|alone\\s+in\\s+my\\s+(?:hotel\\s+room|office)\\s+with\\s+my\\s+(?:laptop|smartphone|devices))\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+(?:had|been\\s+given)\\s+(?:unmonitored|unsupervised)\\s+access|zero\\s+(?:unmonitored|unsupervised)\\s+(?:physical\\s+)?access|never\\s+touched\\s+my\\s+(?:corporate\\s+)?(?:phone|laptop|devices)|devices\\s+(?:always|remain\\s+strictly)\\s+(?:secured|locked))\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_PERIPHERALS",
+      "dynamic_action": "Trigger immediate MDM integrity verification and credential hygiene audit."
+    },
+    {
+      "id": "TP-02",
+      "tier": "tier_5_technical",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Peripheral, USB, or Charging Cable Connection Requests",
+      "description": "Requested to connect personal phone, USB storage, dongle, or supplied charging cable directly into executive's corporate laptop or device.",
+      "severity_weight": 4.8,
+      "likelihoods": {
+        "tier_1_benign": 0.04,
+        "tier_2_commercial_fraud": 0.06,
+        "tier_3_ci_honeypot": 0.82
+      },
+      "positive_patterns": [
+        "\\b(?:charge\\s+(?:her|his|their)\\s+phone\\s+on\\s+my\\s+laptop|plug\\s+(?:in\\s+)?a\\s+usb|usb\\s+(?:stick|drive|cable)\\s+into\\s+my\\s+(?:laptop|computer)|gifted\\s+(?:a\\s+)?(?:power\\s+bank|charging\\s+cable|usb\\s+hub))\\b",
+        "\\b(?:asked\\s+to\\s+transfer\\s+photos\\s+via\\s+usb|connected\\s+(?:a\\s+)?device\\s+to\\s+my\\s+work\\s+laptop)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+connected\\s+any\\s+(?:usb|cable|peripheral)|no\\s+charging\\s+or\\s+usb\\s+requests)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_CREDENTIALS",
+      "dynamic_action": "Treat corporate endpoint as potentially exposed; escalate for forensic MDM and endpoint check."
+    },
+    {
+      "id": "TP-03",
+      "tier": "tier_5_technical",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Inquisitiveness Toward Passcodes, MFA, or Credentials",
+      "description": "Observed screen entries, requested Wi-Fi/device PINs, asked about VPN/MFA tokens, or queried corporate access badges.",
+      "severity_weight": 4.7,
+      "likelihoods": {
+        "tier_1_benign": 0.03,
+        "tier_2_commercial_fraud": 0.14,
+        "tier_3_ci_honeypot": 0.80
+      },
+      "positive_patterns": [
+        "\\b(?:asked\\s+for\\s+my\\s+(?:passcode|pin|password|vpn|mfa)|watched\\s+me\\s+type\\s+my\\s+(?:pin|password)|inquisitive\\s+about\\s+(?:credentials|security\\s+badge|hardware\\s+key|mfa\\s+token))\\b",
+        "\\b(?:internal\\s+network\\s+credentials|corporate\\s+wifi\\s+password|unlock\\s+my\\s+phone)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+asked\\s+for\\s+(?:passcodes|passwords|credentials|pins)|zero\\s+interest\\s+in\\s+my\\s+devices)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_QUARTERS",
+      "dynamic_action": "Recommend silent credential rotation and MFA token audit without alerting partner."
+    },
+    {
+      "id": "TP-04",
+      "tier": "tier_5_technical",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Unattended Electronic Gifts or Luggage in Private Quarters",
+      "description": "Requested to leave luggage, bags, smart speakers, frames, or electronic gifts inside the executive's residence, hotel suite, or office.",
+      "severity_weight": 3.9,
+      "likelihoods": {
+        "tier_1_benign": 0.08,
+        "tier_2_commercial_fraud": 0.10,
+        "tier_3_ci_honeypot": 0.72
+      },
+      "positive_patterns": [
+        "\\b(?:leave\\s+(?:her|his|their)\\s+luggage\\s+in\\s+my\\s+(?:room|suite|office|apartment)|gifted\\s+(?:an?\\s+)?(?:electronic|smart\\s+device|digital\\s+frame|speaker|desk\\s+clock|charger))\\b",
+        "\\b(?:left\\s+(?:a\\s+)?(?:bag|device|electronic\\s+item)\\s+behind\\s+in\\s+my\\s+(?:private\\s+quarters|office|suite))\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:no\\s+unattended\\s+luggage\\s+or\\s+electronic\\s+gifts|never\\s+left\\s+electronics\\s+behind)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_CREDENTIALS",
+      "dynamic_action": "Flag physical TSCM and hardware inspection considerations for CSO briefing."
+    },
+    {
+      "id": "TP-05",
+      "tier": "tier_5_technical",
+      "stage_mapping": "Stage 5: Compromise and Access",
+      "name": "Workspace Access or Photography in Secure Areas",
+      "description": "Requested private tours of executive offices, secure floors, or took photos near whiteboards, screens, or sensitive documents.",
+      "severity_weight": 4.4,
+      "likelihoods": {
+        "tier_1_benign": 0.04,
+        "tier_2_commercial_fraud": 0.05,
+        "tier_3_ci_honeypot": 0.78
+      },
+      "positive_patterns": [
+        "\\b(?:took\\s+(?:a\\s+)?photo(?:s)?\\s+(?:near|of)\\s+(?:my\\s+desk|whiteboard|screen|documents)|asked\\s+for\\s+a\\s+tour\\s+of\\s+my\\s+(?:secure\\s+)?office|visited\\s+the\\s+executive\\s+floor\\s+after\\s+hours)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+visited\\s+my\\s+office|never\\s+photographed\\s+workspace\\s+or\\s+documents)\\b"
+      ],
+      "followup_probe_id": "PROBE_TP_DEVICES",
+      "dynamic_action": "Review facility visitor logs and restrict further physical access discreetly."
+    },
+    {
+      "id": "FF-01",
+      "tier": "tier_6_financial",
+      "stage_mapping": "Commercial Fraud Vector",
+      "name": "Unverifiable Private Wealth or Inheritance Claims",
+      "description": "Boasts of substantial inherited assets, offshore trusts, or luxury holdings that cannot be corroborated and clash with sudden liquidity shortages.",
+      "severity_weight": 3.3,
+      "likelihoods": {
+        "tier_1_benign": 0.05,
+        "tier_2_commercial_fraud": 0.84,
+        "tier_3_ci_honeypot": 0.28
+      },
+      "positive_patterns": [
+        "\\b(?:inherited\\s+(?:wealth|fortune|gemstones|gold|trust)|offshore\\s+trust|unverifiable\\s+wealth|frozen\\s+inheritance|opaque\\s+family\\s+fortune)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:modest\\s+transparent\\s+finances|no\\s+exaggerated\\s+wealth\\s+claims|financially\\s+independent\\s+with\\s+normal\\s+salary)\\b"
+      ],
+      "followup_probe_id": "PROBE_FF_CRISIS",
+      "dynamic_action": "Screen for fabricated liquidity crises or direct monetary solicitation."
+    },
+    {
+      "id": "FF-02",
+      "tier": "tier_6_financial",
+      "stage_mapping": "Commercial Fraud Vector",
+      "name": "Fabricated Urgent Liquidity, Medical, or Customs Crisis",
+      "description": "Experiences sudden high-urgency financial emergencies (blocked bank account, customs hold, stranded travel, medical fee) requiring immediate executive intervention.",
+      "severity_weight": 4.2,
+      "likelihoods": {
+        "tier_1_benign": 0.03,
+        "tier_2_commercial_fraud": 0.90,
+        "tier_3_ci_honeypot": 0.14
+      },
+      "positive_patterns": [
+        "\\b(?:customs\\s+(?:crisis|hold|fee)|frozen\\s+bank\\s+account|liquidity\\s+crisis|stranded\\s+abroad\\s+needing\\s+funds|urgent\\s+medical\\s+bill|emergency\\s+release\\s+fee)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+had\\s+a\\s+financial\\s+emergency|no\\s+sudden\\s+money\\s+crises)\\b"
+      ],
+      "followup_probe_id": "PROBE_FF_TRANSFERS",
+      "dynamic_action": "Advise strict financial firewall and zero disbursement of funds."
+    },
+    {
+      "id": "FF-03",
+      "tier": "tier_6_financial",
+      "stage_mapping": "Commercial Fraud Vector",
+      "name": "Requests for Wire Transfers, Loans, or Crypto Investments",
+      "description": "Solicits direct wire transfers, bridge loans, escrow deposits, or cryptocurrency trading platform investments.",
+      "severity_weight": 4.6,
+      "likelihoods": {
+        "tier_1_benign": 0.02,
+        "tier_2_commercial_fraud": 0.92,
+        "tier_3_ci_honeypot": 0.12
+      },
+      "positive_patterns": [
+        "\\b(?:wire\\s+transfer|bridge\\s+loan|crypto(?:currency)?\\s+(?:investment|trading|wallet|platform)|send\\s+\\$?[\\d,]+|asked\\s+(?:me\\s+)?for\\s+(?:money|a\\s+loan|\\$[\\d,]+)|financial\\s+assistance)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:never\\s+asked\\s+for\\s+(?:money|loans|wires|crypto|financial\\s+help)|zero\\s+financial\\s+requests)\\b"
+      ],
+      "followup_probe_id": "PROBE_BASE_ELICITATION",
+      "dynamic_action": "Freeze any financial exposure; verify whether corporate IP probing coexists."
+    },
+    {
+      "id": "FF-04",
+      "tier": "tier_6_financial",
+      "stage_mapping": "Commercial Fraud Vector",
+      "name": "Demands for High-Value Liquid Gifts or Account Access",
+      "description": "Escalating requests for luxury jewelry, watches, credit cards, co-signed leases, or joint account privileges early in the relationship.",
+      "severity_weight": 3.6,
+      "likelihoods": {
+        "tier_1_benign": 0.05,
+        "tier_2_commercial_fraud": 0.82,
+        "tier_3_ci_honeypot": 0.18
+      },
+      "positive_patterns": [
+        "\\b(?:high[- ]value\\s+gifts|luxury\\s+(?:watch|jewelry)\\s+demands|joint\\s+(?:bank\\s+)?account|co[- ]sign\\s+a\\s+lease|credit\\s+card\\s+access|sudden\\s+financial\\s+entanglement)\\b"
+      ],
+      "negation_patterns": [
+        "\\b(?:splits\\s+expenses\\s+equally|never\\s+requested\\s+expensive\\s+gifts\\s+or\\s+account\\s+access)\\b"
+      ],
+      "followup_probe_id": "PROBE_BASE_LEGEND",
+      "dynamic_action": "Maintain asset boundary and verify independent financial background."
+    }
+  ]
+}

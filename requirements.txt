@@ -1,0 +1,4 @@
+# Core runtime scripts in scripts/ require only the Python 3.10+ standard library.
+# The packages below support automated testing and SKILL.md YAML frontmatter validation.
+PyYAML>=6.0,<7.0
+pytest>=8.0.0,<10.0.0

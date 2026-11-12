@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Honeypot Diagnostic Ephemeral Session",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "session_id",
+    "created_at",
+    "updated_at",
+    "stage",
+    "risk_profile",
+    "turn_count",
+    "redaction_count",
+    "covered_tiers",
+    "asked_probe_ids",
+    "pending_followup_probes",
+    "dynamic_rules_triggered",
+    "indicators",
+    "inferred_canary_domain"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "session_id": { "type": "string", "minLength": 8 },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "stage": {
+      "type": "string",
+      "enum": ["inception", "probing", "ready_for_synthesis", "completed"]
+    },
+    "risk_profile": {
+      "type": "string",
+      "enum": ["standard", "high_exposure"]
+    },
+    "turn_count": { "type": "integer", "minimum": 0 },
+    "redaction_count": { "type": "integer", "minimum": 0 },
+    "sensitive_terms": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "covered_tiers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "asked_probe_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "pending_followup_probes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dynamic_rules_triggered": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "inferred_canary_domain": {
+      "type": "string",
+      "enum": [
+        "ma_strategy",
+        "technical_roadmap",
+        "board_governance",
+        "procurement_supply_chain",
+        "general_operations"
+      ]
+    },
+    "turn_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["turn", "timestamp", "sanitized_excerpt", "matched_indicator_ids", "redactions_in_turn"],
+        "properties": {
+          "turn": { "type": "integer", "minimum": 1 },
+          "timestamp": { "type": "string" },
+          "sanitized_excerpt": { "type": "string" },
+          "matched_indicator_ids": { "type": "array", "items": { "type": "string" } },
+          "redactions_in_turn": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "indicators": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "tier", "status", "confidence", "source"],
+        "properties": {
+          "id": { "type": "string" },
+          "tier": { "type": "string" },
+          "status": { "type": "string", "enum": ["present", "absent", "unknown"] },
+          "confidence": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "source": { "type": "string", "enum": ["regex", "structured", "hybrid"] },
+          "evidence_excerpt": { "type": "string" },
+          "conflict_flagged": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

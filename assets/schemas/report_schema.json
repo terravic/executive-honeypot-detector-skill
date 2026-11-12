@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Honeypot Diagnostic Executive Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "session_id",
+    "generated_at",
+    "risk_profile",
+    "classification",
+    "confidence",
+    "posteriors",
+    "composite_risk_score",
+    "tier_breakdown",
+    "blind_spots",
+    "indicators_summary",
+    "top_drivers",
+    "countermeasures",
+    "canary_protocol",
+    "opsec_metadata",
+    "legal_disclaimer"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "risk_profile": { "type": "string", "enum": ["standard", "high_exposure"] },
+    "classification": {
+      "type": "object",
+      "required": ["id", "label", "posture_summary"],
+      "properties": {
+        "id": { "type": "string", "enum": ["tier_1_benign", "tier_2_commercial_fraud", "tier_3_ci_honeypot"] },
+        "label": { "type": "string" },
+        "posture_summary": { "type": "string" }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "required": ["level", "insufficient_data", "core_tiers_covered", "core_tiers_total", "coverage_percent"],
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "moderate", "high"] },
+        "insufficient_data": { "type": "boolean" },
+        "core_tiers_covered": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "core_tiers_total": { "type": "integer", "const": 5 },
+        "coverage_percent": { "type": "number", "minimum": 0.0, "maximum": 100.0 }
+      }
+    },
+    "posteriors": {
+      "type": "object",
+      "required": ["tier_1_benign", "tier_2_commercial_fraud", "tier_3_ci_honeypot"],
+      "properties": {
+        "tier_1_benign": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "tier_2_commercial_fraud": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "tier_3_ci_honeypot": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "composite_risk_score": { "type": "number", "minimum": 0.0, "maximum": 100.0 },
+    "tier_breakdown": { "type": "array" },
+    "blind_spots": { "type": "array", "items": { "type": "string" } },
+    "indicators_summary": { "type": "object" },
+    "top_drivers": { "type": "array" },
+    "countermeasures": { "type": "array" },
+    "canary_protocol": { "type": "object" },
+    "opsec_metadata": {
+      "type": "object",
+      "required": ["redaction_count", "turn_count", "session_purged"],
+      "properties": {
+        "redaction_count": { "type": "integer", "minimum": 0 },
+        "turn_count": { "type": "integer", "minimum": 0 },
+        "session_purged": { "type": "boolean" }
+      }
+    },
+    "legal_disclaimer": { "type": "string" }
+  }
+}
