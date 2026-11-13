@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "diag-ca2e251212da",
+  "created_at": "2026-11-13T16:47:10Z",
+  "updated_at": "2026-11-13T16:47:11Z",
+  "stage": "completed",
+  "risk_profile": "high_exposure",
+  "turn_count": 4,
+  "redaction_count": 4,
+  "sensitive_terms": [
+    "Helios Photonics",
+    "Project Borealis"
+  ],
+  "covered_tiers": [
+    "tier_1_approach",
+    "tier_2_legend",
+    "tier_3_elicitation",
+    "tier_4_intimacy",
+    "tier_5_technical",
+    "tier_6_financial"
+  ],
+  "asked_probe_ids": [
+    "PROBE_INCEPTION",
+    "PROBE_AV_ITINERARY",
+    "PROBE_LV_FOOTPRINT",
+    "PROBE_IE_TACTICS",
+    "PROBE_TP_DEVICES"
+  ],
+  "last_probe_tier": "tier_5_technical",
+  "pending_followup_probes": [
+    "PROBE_AV_JUSTIFICATION",
+    "PROBE_AV_CONTEXT",
+    "PROBE_LV_ASSOCIATES",
+    "PROBE_LV_TIMELINE",
+    "PROBE_IE_SPECIFICS",
+    "PROBE_IA_COHABITATION",
+    "PROBE_TP_CREDENTIALS",
+    "PROBE_TP_QUARTERS",
+    "PROBE_TP_PERIPHERALS"
+  ],
+  "dynamic_rules_triggered": [
+    "RULE_TRANSIENT_MEETING",
+    "RULE_SHALLOW_LEGEND",
+    "RULE_COVERT_ELICITATION",
+    "RULE_TECHNICAL_EXPOSURE"
+  ],
+  "inferred_canary_domain": "ma_strategy",
+  "turn_history": [
+    {
+      "turn": 1,
+      "timestamp": "2026-11-13T16:47:10Z",
+      "sanitized_excerpt": "I met my partner unexpectedly at an airport lounge in Frankfurt right after my keynote at a semiconductor forum. My travel itinerary and speaking schedule for [REDACTED_ENTITY] had been publicized beforehand. They approached me unprompted, shared the same obscure hobby in vint...",
+      "matched_indicator_ids": [
+        "AV-01",
+        "AV-02",
+        "AV-03",
+        "AV-05"
+      ],
+      "redactions_in_turn": 3
+    },
+    {
+      "turn": 2,
+      "timestamp": "2026-11-13T16:47:10Z",
+      "sanitized_excerpt": "They claim to work as an independent art-advisory consultant with private clients and zero verifiable corporate footprint online. They have no verifiable long-term associates, deflect personal questions, and smoothly pivot conversations back to me.",
+      "matched_indicator_ids": [
+        "LV-01",
+        "LV-02",
+        "LV-03",
+        "LV-04"
+      ],
+      "redactions_in_turn": 0
+    },
+    {
+      "turn": 3,
+      "timestamp": "2026-11-13T16:47:11Z",
+      "sanitized_excerpt": "Over dinner they repeatedly steered discussion toward our upcoming [REDACTED_ENTITY] lithography roadmap, R&D milestones, and whether the board was evaluating cross-border M&A bids. They have never asked for money, wire transfers, loans, or crypto investments.",
+      "matched_indicator_ids": [
+        "IE-01",
+        "IE-02",
+        "FF-03"
+      ],
+      "redactions_in_turn": 1
+    },
+    {
+      "turn": 4,
+      "timestamp": "2026-11-13T16:47:11Z",
+      "sanitized_excerpt": "They accelerated intimacy rapidly within three weeks and encouraged keeping our trips quiet from my chief of staff. Last week they gifted me a multi-port USB-C travel hub, asked to plug it into my corporate laptop to share photos, and watched closely as I entered my device pas...",
+      "matched_indicator_ids": [
+        "IA-01",
+        "IA-04",
+        "TP-02",
+        "TP-03"
+      ],
+      "redactions_in_turn": 0
+    }
+  ],
+  "indicators": {
+    "AV-01": {
+      "id": "AV-01",
+      "tier": "tier_1_approach",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "hybrid",
+      "evidence_excerpt": "I met my partner unexpectedly at an airport lounge in Frankfurt right after my keynote at a semiconductor forum. My travel itinerary and speaking schedule for [REDACTED_ENTITY] had been publicized beforehand. They approached me unprompted, shared the same obscure hobby in vint...",
+      "conflict_flagged": false
+    },
+    "AV-02": {
+      "id": "AV-02",
+      "tier": "tier_1_approach",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "hybrid",
+      "evidence_excerpt": "I met my partner unexpectedly at an airport lounge in Frankfurt right after my keynote at a semiconductor forum. My travel itinerary and speaking schedule for [REDACTED_ENTITY] had been publicized beforehand. They approached me unprompted, shared the same obscure hobby in vint...",
+      "conflict_flagged": false
+    },
+    "AV-03": {
+      "id": "AV-03",
+      "tier": "tier_1_approach",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "hybrid",
+      "evidence_excerpt": "I met my partner unexpectedly at an airport lounge in Frankfurt right after my keynote at a semiconductor forum. My travel itinerary and speaking schedule for [REDACTED_ENTITY] had been publicized beforehand. They approached me unprompted, shared the same obscure hobby in vint...",
+      "conflict_flagged": false
+    },
+    "AV-05": {
+      "id": "AV-05",
+      "tier": "tier_1_approach",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "hybrid",
+      "evidence_excerpt": "I met my partner unexpectedly at an airport lounge in Frankfurt right after my keynote at a semiconductor forum. My travel itinerary and speaking schedule for [REDACTED_ENTITY] had been publicized beforehand. They approached me unprompted, shared the same obscure hobby in vint...",
+      "conflict_flagged": false
+    },
+    "LV-01": {
+      "id": "LV-01",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "structured",
+      "evidence_excerpt": "They claim to work as an independent art-advisory consultant with private clients and zero verifiable corporate footprint online. They have no verifiable long-term associates, deflect personal questions, and smoothly pivot conversations back to me.",
+      "conflict_flagged": false
+    },
+    "LV-02": {
+      "id": "LV-02",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "structured",
+      "evidence_excerpt": "They claim to work as an independent art-advisory consultant with private clients and zero verifiable corporate footprint online. They have no verifiable long-term associates, deflect personal questions, and smoothly pivot conversations back to me.",
+      "conflict_flagged": true
+    },
+    "LV-03": {
+      "id": "LV-03",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "structured",
+      "evidence_excerpt": "They claim to work as an independent art-advisory consultant with private clients and zero verifiable corporate footprint online. They have no verifiable long-term associates, deflect personal questions, and smoothly pivot conversations back to me.",
+      "conflict_flagged": false
+    },
+    "LV-04": {
+      "id": "LV-04",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "structured",
+      "evidence_excerpt": "They claim to work as an independent art-advisory consultant with private clients and zero verifiable corporate footprint online. They have no verifiable long-term associates, deflect personal questions, and smoothly pivot conversations back to me.",
+      "conflict_flagged": false
+    },
+    "IE-01": {
+      "id": "IE-01",
+      "tier": "tier_3_elicitation",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "hybrid",
+      "evidence_excerpt": "Over dinner they repeatedly steered discussion toward our upcoming [REDACTED_ENTITY] lithography roadmap, R&D milestones, and whether the board was evaluating cross-border M&A bids. They have never asked for money, wire transfers, loans, or crypto investments.",
+      "conflict_flagged": false
+    },
+    "IE-02": {
+      "id": "IE-02",
+      "tier": "tier_3_elicitation",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "hybrid",
+      "evidence_excerpt": "Over dinner they repeatedly steered discussion toward our upcoming [REDACTED_ENTITY] lithography roadmap, R&D milestones, and whether the board was evaluating cross-border M&A bids. They have never asked for money, wire transfers, loans, or crypto investments.",
+      "conflict_flagged": false
+    },
+    "FF-03": {
+      "id": "FF-03",
+      "tier": "tier_6_financial",
+      "status": "absent",
+      "confidence": 0.95,
+      "source": "hybrid",
+      "evidence_excerpt": "Over dinner they repeatedly steered discussion toward our upcoming [REDACTED_ENTITY] lithography roadmap, R&D milestones, and whether the board was evaluating cross-border M&A bids. They have never asked for money, wire transfers, loans, or crypto investments.",
+      "conflict_flagged": false
+    },
+    "IA-01": {
+      "id": "IA-01",
+      "tier": "tier_4_intimacy",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "hybrid",
+      "evidence_excerpt": "They accelerated intimacy rapidly within three weeks and encouraged keeping our trips quiet from my chief of staff. Last week they gifted me a multi-port USB-C travel hub, asked to plug it into my corporate laptop to share photos, and watched closely as I entered my device pas...",
+      "conflict_flagged": false
+    },
+    "IA-04": {
+      "id": "IA-04",
+      "tier": "tier_4_intimacy",
+      "status": "present",
+      "confidence": 0.85,
+      "source": "structured",
+      "evidence_excerpt": "They accelerated intimacy rapidly within three weeks and encouraged keeping our trips quiet from my chief of staff. Last week they gifted me a multi-port USB-C travel hub, asked to plug it into my corporate laptop to share photos, and watched closely as I entered my device pas...",
+      "conflict_flagged": false
+    },
+    "TP-02": {
+      "id": "TP-02",
+      "tier": "tier_5_technical",
+      "status": "present",
+      "confidence": 0.95,
+      "source": "structured",
+      "evidence_excerpt": "They accelerated intimacy rapidly within three weeks and encouraged keeping our trips quiet from my chief of staff. Last week they gifted me a multi-port USB-C travel hub, asked to plug it into my corporate laptop to share photos, and watched closely as I entered my device pas...",
+      "conflict_flagged": false
+    },
+    "TP-03": {
+      "id": "TP-03",
+      "tier": "tier_5_technical",
+      "status": "present",
+      "confidence": 0.9,
+      "source": "structured",
+      "evidence_excerpt": "They accelerated intimacy rapidly within three weeks and encouraged keeping our trips quiet from my chief of staff. Last week they gifted me a multi-port USB-C travel hub, asked to plug it into my corporate laptop to share photos, and watched closely as I entered my device pas...",
+      "conflict_flagged": false
+    }
+  }
+}

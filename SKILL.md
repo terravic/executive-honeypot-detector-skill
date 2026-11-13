@@ -79,21 +79,28 @@ Repeat for each executive response until `ready_for_synthesis` is `true` or the 
    - **`next_probe`**: Read `next_probe.question` and deliver it conversationally without sounding mechanical or accusatory. Ask only one focused follow-up per turn.
    - **`ready_for_synthesis`**: When `true`, proceed directly to Phase 3.
 
-### Phase 3: Executive Synthesis and Ephemeral Purge
-1. Generate the final structured report and purge any ephemeral session file:
+### Phase 3: Executive Synthesis, Optional Dashboard Visualization, and Ephemeral Purge
+1. *(Optional: Visual Brief Generation)* If the executive or CSO requests an interactive visual diagnostic dashboard (Bayesian turn trajectory, 32-indicator log-likelihood attribution, 3D threat topology, and countermeasures), build the standalone offline `dashboard.html` **before** purging any ephemeral session file:
+   ```bash
+   python3 scripts/build_dashboard.py \
+     --session-json '<SESSION_JSON>' \
+     --output dashboard.html
+   ```
+   *(Or pass `--session-file <PATH>` or `--report-json <PATH>`. Treat the generated `dashboard.html` as a privileged, redacted review artifact; it contains only sanitized excerpts and also supports offline, volatile-RAM self-service interviews via its built-in Start New Interview and Purge RAM controls.)*
+2. Generate the final structured report and purge any ephemeral session file:
    ```bash
    python3 scripts/honeypot_cli.py generate-report \
      --session-json '<SESSION_JSON>'
    ```
    *(When using `--session-file`, always append `--purge-session` so the temporary state file is zero-filled and deleted immediately.)*
-2. Present the generated `report_markdown` cleanly to the user. Preserve every section:
+3. Present the generated `report_markdown` cleanly to the user. Preserve every section:
    - Primary Threat Classification and Bayesian Posterior Table
    - Diagnostic Dimension Breakdown and Unassessed Blind Spots (if fewer than 3 of 5 core tiers were covered, highlight the preliminary confidence caveat clearly)
    - Key Indicator Evidence and Attribution
    - Prescribed Defensive Countermeasures (consult `references/defensive_protocols.md` if the user requests deeper practical steps)
    - Passive Canary Protocol (for elevated CI risk, emphasizing coordination with CSO and General Counsel prior to execution)
    - Mandatory Operational Security and Legal Disclaimer
-3. If the classification is `tier_3_ci_honeypot`, reinforce calmly in your closing message that the executive should **not** confront the partner unilaterally and should prioritize silent MDM device review and privileged CSO/General Counsel consultation.
+4. If the classification is `tier_3_ci_honeypot`, reinforce calmly in your closing message that the executive should **not** confront the partner unilaterally and should prioritize silent MDM device review and privileged CSO/General Counsel consultation.
 
 ---
 

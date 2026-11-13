@@ -231,7 +231,7 @@
     "ma_strategy": {
       "domain_label": "Corporate M&A and Deal Strategy",
       "applicable_indicators": ["IE-01", "IE-06"],
-      "script": "During a casual conversation when work arises naturally, mention a strictly benign, non-material scheduling inaccuracy—for example, stating that an internal portfolio review committee moved from Thursday to a non-existent regional retreat next month—using a distinct synthetic internal label agreed with your CSO.",
+      "script": "During a casual conversation when work arises naturally, mention a strictly benign, non-material scheduling inaccuracy (for example, stating that an internal portfolio review committee moved from Thursday to a non-existent regional retreat next month) using a distinct synthetic internal label agreed with your CSO.",
       "observation_criteria": "Monitor whether that unique synthetic label or distorted review timing resurfaces via external analysts, competitor chatter, unusual partner follow-up queries, or targeted spear-phishing.",
       "safety_guardrail": "Never plant fabricated material non-public information (MNPI) that could violate securities law or cause market distortion; coordinate any deployment with Corporate General Counsel."
     },

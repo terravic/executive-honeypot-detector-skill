@@ -5,14 +5,14 @@
 | Document Attribute | Specification |
 |---|---|
 | Skill Identifier | `executive-honeypot-detector` |
-| Document Version | 1.1.0 |
+| Document Version | 1.2.0 |
 | License | Apache License, Version 2.0 (`LICENSE`) |
-| Target Harness | Standard `SKILL.md`-compatible agent harnesses and runtime environments supporting local Python CLI execution |
+| Target Harness | Standard `SKILL.md`-compatible agent harnesses with local Python 3.10+ CLI execution, plus standalone local desktop browsers for `dashboard.html` |
 | Functional Category | Executive Protection, Counterintelligence (CI), Insider Threat Prevention, Behavioral Risk Diagnostics |
 | Primary Audience | Corporate Leadership, Senior Executives, Board Members, Chief Security Officers (CSOs), Corporate General Counsel |
 
 ### 1.1 Executive Objective
-This skill provides a modular, conversational diagnostic capability enabling senior corporate executives and security stakeholders to evaluate whether a new romantic relationship exhibits indicators of targeted human intelligence (HUMINT) exploitation, corporate espionage, commercial romance fraud, or organic benign dynamics. The skill pairs an adaptive, psychologically informed conversational workflow in `SKILL.md` with deterministic Python risk-modeling modules in `scripts/` that evaluate 32 discrete counterintelligence indicators through a calibrated Bayesian Threat Matrix and produce discreet, non-escalatory mitigation protocols.
+This skill provides a modular diagnostic capability enabling senior corporate executives and security stakeholders to evaluate whether a new romantic relationship exhibits indicators of targeted human intelligence (HUMINT) exploitation, corporate espionage, commercial romance fraud, or organic benign dynamics. The skill pairs an adaptive, psychologically informed conversational workflow in `SKILL.md` with deterministic Python risk-modeling modules in `scripts/` that evaluate 32 discrete counterintelligence indicators through a calibrated Bayesian Threat Matrix, produce discreet non-escalatory mitigation protocols, and optionally emit a dual-mode standalone HTML visual dashboard (`dashboard.html`) supporting both post-session analysis and volatile-RAM self-service browser interviews.
 
 ---
 
@@ -22,20 +22,20 @@ This skill provides a modular, conversational diagnostic capability enabling sen
 
 | Persona | Technical Profile | User Story | Acceptance Criterion |
 |---|---|---|---|
-| Senior Executive / Board Member | Non-technical; experiencing cognitive dissonance between romantic interest and operational caution | As a senior executive who met a new partner during international travel, I want a discreet, non-judgmental assessment so I can evaluate potential espionage risk without alerting my partner or triggering premature panic. | Adaptive interview covers all relevant risk tiers without accusatory phrasing, produces a plain-language threat classification, and provides passive verification steps. |
-| Chief Security Officer (CSO) / Threat Analyst | Technical; responsible for insider threat and executive protection triage | As a CSO reviewing an anonymized diagnostic brief, I want transparent Bayesian indicator attributions and log-likelihood drivers so I can prioritize mobile device audits and protective escalation. | Diagnostic report outputs reproducible posterior probabilities across three threat tiers, itemized active/negated indicators, and coverage blind spots. |
-| Corporate General Counsel | Legal/compliance; responsible for liability, privilege, and privacy boundaries | As General Counsel, I want strict assurance that the skill retains zero real identity data, performs no offensive surveillance, and carries an explicit legal disclaimer. | All session inputs undergo automated OPSEC redaction, ephemeral session files are overwritten and deleted upon report synthesis, and no external network queries occur. |
+| Senior Executive / Board Member | Non-technical; experiencing cognitive dissonance between romantic interest and operational caution | As a senior executive who met a new partner during international travel, I want a discreet, non-judgmental assessment (either via conversational chat or a private offline browser workspace) so I can evaluate potential espionage risk without alerting my partner or persisting sensitive narrative data. | Adaptive interview covers all relevant risk tiers without accusatory phrasing, produces a plain-language threat classification, provides passive verification steps, and supports Calm Focus Mode plus immediate RAM purge in browser mode. |
+| Chief Security Officer (CSO) / Threat Analyst | Technical; responsible for insider threat and executive protection triage | As a CSO reviewing an anonymized diagnostic brief or standalone HTML dashboard, I want transparent Bayesian indicator attributions, turn-by-turn probability trajectories, and 3D topology mapping so I can prioritize mobile device audits and protective escalation. | Diagnostic reports and `dashboard.html` output reproducible posterior probabilities across three threat tiers, itemized active/negated indicators with monospaced numeric alignment, and coverage blind spots. |
+| Corporate General Counsel | Legal/compliance; responsible for liability, privilege, and privacy boundaries | As General Counsel, I want strict assurance that the skill retains zero real identity data, performs no offensive surveillance, and carries an explicit legal disclaimer. | All session inputs undergo automated OPSEC redaction, ephemeral session files are overwritten and deleted upon report synthesis, browser interviews remain in volatile RAM only, and no diagnostic telemetry leaves the local machine. |
 
 ### 2.2 Explicit Scope Boundaries
 
 | In-Scope Capabilities | Out-of-Scope Capabilities |
 |---|---|
-| Multi-turn adaptive counterintelligence diagnostic interviewing | Offensive surveillance, covert tracking, or private investigative field work |
-| Hybrid extraction of 32 discrete CI and commercial fraud indicators with negation handling | Active cyber reconnaissance, scraping, or background database lookups |
-| Quantitative Bayesian posterior scoring across three threat classifications | Phone interception, live handset malware scanning, or network packet capture |
-| Automated OPSEC redaction of emails, phone numbers, and configured sensitive terms | Permanent storage of executive identities, real partner names, or corporate secrets |
-| Non-confrontational defensive playbooks and passive Canary Protocol scripts | Certified legal advice, law enforcement reporting automation, or psychological therapy |
-| Local CLI and harness-agnostic JSON/Markdown report synthesis | Outbound third-party API integrations or cloud telemetry transmission |
+| Multi-turn adaptive counterintelligence diagnostic interviewing via agent CLI or standalone browser dashboard | Offensive surveillance, covert tracking, or private investigative field work |
+| Hybrid extraction of 32 discrete CI and commercial fraud indicators with span-aware negation handling | Active cyber reconnaissance, scraping, or background database lookups |
+| Quantitative Bayesian posterior scoring across three threat classifications with intra-tier correlation damping | Phone interception, live handset malware scanning, or network packet capture |
+| Automated OPSEC redaction of emails, phone numbers, SSNs, cards, IPs, tokenized URLs, and configured sensitive terms | Permanent storage of executive identities, real partner names, or corporate secrets |
+| Non-confrontational defensive playbooks and domain-tailored passive Canary Protocol scripts | Certified legal advice, law enforcement reporting automation, or psychological therapy |
+| Local CLI report synthesis (Markdown/JSON) and standalone single-file HTML dashboard generation (`dashboard.html`) | Outbound third-party API integrations, remote database persistence, or cloud telemetry transmission |
 
 ---
 
@@ -57,7 +57,7 @@ Clandestine intelligence services and corporate espionage contractors exploit ro
 
 ## 4. Technical Architecture
 
-The skill enforces a separation between conversational orchestration (handled by the host LLM reading `SKILL.md` and `references/*.md`) and deterministic scoring, state control, and OPSEC sanitization (executed locally by `scripts/honeypot_cli.py`).
+The skill enforces a separation between conversational orchestration (handled by the host LLM reading `SKILL.md` and `references/*.md`), deterministic scoring and OPSEC sanitization (executed locally by `scripts/honeypot_cli.py`), and interactive visual presentation or offline self-service interviewing (compiled by `scripts/build_dashboard.py` into `dashboard.html`).
 
 ### 4.1 System Component and Sequence Flow
 
@@ -91,21 +91,31 @@ The skill enforces a separation between conversational orchestration (handled by
 |  | - Selects next probe  |     | - Per-indicator attribution ranking     |  |
 |  +-----------+-----------+     +-----------------------------------------+  |
 |              |                                                              |
-|              v                                                              |
-|  +-----------------------------------------------------------------------+  |
-|  | scripts/report_generator.py                                           |  |
-|  | - Renders assets/report_template.md + JSON report                     |  |
-|  | - Tailors passive Canary Protocol to inferred elicitation domain      |  |
-|  | - Optionally invokes secure_purge_file() on ephemeral session file    |  |
-|  +-----------------------------------------------------------------------+  |
-+------------------------------+----------------------------------------------+
-                               |
+|              +-----------------------------+                                |
+|              v                             v                                |
+|  +----------------------------------+  +---------------------------------+  |
+|  | scripts/report_generator.py      |  | scripts/build_dashboard.py      |  |
+|  | - Renders report_template.md     |  | - Detects host OS theme         |  |
+|  | - Emits structured JSON report   |  | - Embeds catalog + datasets     |  |
+|  | - Tailors passive Canary script  |  | - Emits standalone dashboard.html| |
+|  | - Invokes secure_purge_file()    |  +----------------+----------------+  |
+|  +----------------------------------+                   |                   |
++---------------------------------------------------------+-------------------+
+                               |                          v
+                               |        +-------------------------------------+
+                               |        | dashboard.html (Local Browser)      |
+                               |        | - Mode 1: Post-session visual brief |
+                               |        | - Mode 2: Volatile-RAM interview    |
+                               |        | - 3D Threat Topology + 2D fallback  |
+                               |        | - Load JSON / Export JSON / Purge   |
+                               |        +-------------------------------------+
                                v
 +-----------------------------------------------------------------------------+
 |                         Declarative Assets (assets/)                        |
 |  - indicators_taxonomy.json (32 weighted CI/Fraud indicators + priors)      |
 |  - probes_and_countermeasures.json (Probes, dynamic rules, playbooks)       |
 |  - report_template.md (Structured Markdown executive brief template)        |
+|  - dashboard_template.html (Self-contained dashboard UI and JS engine)      |
 |  - schemas/session_schema.json & schemas/report_schema.json                 |
 +-----------------------------------------------------------------------------+
 ```
@@ -114,19 +124,33 @@ The skill enforces a separation between conversational orchestration (handled by
 
 | Path | Responsibility | Implementation Contract |
 |---|---|---|
+| `DESIGN.md` | Visual hierarchy, light/dark/system theme tokens, typography, and chart palette specification | Authoritative dashboard design specification |
 | `LICENSE` | Apache License, Version 2.0 terms | Governing open-source license |
-| `SKILL.md` | Agent orchestration, YAML metadata, psychological posture rules, and CLI workflow | Relative path links; progressive disclosure to `references/` |
-| `README.md` | Setup, local CLI instructions, directory tree, and non-technical user guide | Relative paths from project root |
+| `SKILL.md` | Agent orchestration, YAML metadata, psychological posture rules, CLI workflow, and Phase 3 optional dashboard build | Relative path links; progressive disclosure to `references/` |
+| `README.md` | Setup, local CLI instructions, dashboard build commands, directory tree, and non-technical dual-workflow user guide | Relative paths from project root |
+| `dashboard.html` | Pre-built standalone offline interactive HTML dashboard containing default synthetic scenarios and the in-browser engine | Built deterministically by `scripts/build_dashboard.py` |
 | `requirements.txt` | Test and frontmatter validation dependencies (`PyYAML`, `pytest`) | Core `scripts/` use Python 3.10+ standard library only |
-| `documents/prd.md` | Architecture, requirements, scoring model, and error handling specifications | Authoritative design reference |
+| `assets/dashboard_template.html` | Self-contained HTML/CSS/JS dashboard template embedding the client-side engine, WebGL + software 3D renderer, and theme controller | Pure ASCII source with single `{{DASHBOARD_DATA_JSON}}` injection marker |
+| `assets/indicators_taxonomy.json` | 32 weighted CI and commercial fraud indicators, regex patterns, negation phrases, and baseline priors | Validated by `taxonomy_engine.load_and_validate_assets` |
+| `assets/probes_and_countermeasures.json` | Adaptive baseline/follow-up probes, dynamic escalation rules, countermeasures, and domain-tailored Canary playbooks | Shared identically by Python backend and browser JS engine |
+| `assets/report_template.md` | Structured Markdown executive diagnostic report template | Rendered by `scripts/report_generator.py` |
+| `assets/schemas/session_schema.json` | Ephemeral session JSON schema | Validated across CLI turns and browser `Load JSON` |
+| `assets/schemas/report_schema.json` | Final diagnostic report JSON schema | Validated across CLI report export and browser `Load JSON` |
+| `documents/prd.md` | Architecture, requirements, scoring model, and error-handling specifications | Authoritative product requirements document |
+| `examples/sample_session.json` | Sample sanitized multi-turn session JSON with 4 redacted turns | Ready-to-load sample for `build_dashboard.py --session-file` and browser `Load JSON` |
+| `examples/sample_report.json` | Sample finalized diagnostic report JSON generated from `examples/sample_session.json` | Ready-to-load sample for `build_dashboard.py --report-json` and browser `Load JSON` |
+| `references/defensive_protocols.md` | Tier 1/2/3 containment, Canary Protocol guardrails, and CSO escalation manual | Loaded on demand during Phase 3 synthesis |
+| `references/interview_playbook.md` | Psychological framing, pacing rules, and non-accusatory phrasing guide | Loaded on demand during Phase 1-2 interviews |
+| `references/tradecraft_taxonomy.md` | Human-readable reference covering all 32 indicators and structured observation mapping | Loaded on demand during Phase 2 analysis |
 | `scripts/__init__.py` | Project root discovery, environment configuration, and typed exception classes | Honors `HONEYPOT_SKILL_ASSETS_DIR` and `HONEYPOT_SKILL_LOG_LEVEL` |
 | `scripts/sanitizer.py` | OPSEC regex scrubbing, custom blocklist masking, safe path enforcement, secure file wiping | Redacts emails, phones, SSNs, cards, IPs, tokenized URLs, and sensitive terms |
 | `scripts/taxonomy_engine.py` | Declarative loader, 32-indicator validator, span-aware regex + observation matcher, cross-turn Canary domain resolver | Validates exact count (32), probability bounds `(0, 1)`, and dynamic follow-up triggers |
 | `scripts/bayesian_scorer.py` | Quantitative multi-hypothesis Bayesian Threat Matrix with intra-tier damping | Guarantees normalized posteriors summing to `1.0` and deterministic explainability |
 | `scripts/interview_engine.py` | Adaptive state-gate engine managing inception, probing, synthesis readiness, and pause/resume | Prevents duplicate probe IDs; escalates high-risk tiers immediately |
 | `scripts/report_generator.py` | Executive Markdown and JSON report formatter plus passive Canary script builder | Structured Markdown and JSON output with mandatory legal disclaimer |
+| `scripts/build_dashboard.py` | Standalone HTML dashboard compiler accepting `--session-file`, `--session-json`, `--report-json`, or default synthetic scenarios | Detects host OS theme (`macOS`/`Windows`/`Linux`), validates safe output paths, escapes embedded JSON safely |
 | `scripts/honeypot_cli.py` | Unified command-line interface exposing `validate-taxonomy`, `init-session`, `analyze-turn`, `score`, `generate-report`, and `purge-session` | Standard exit codes: `0` success, `1` runtime failure, `2` input validation error |
-| `tests/` | Unit tests, end-to-end CLI scenario tests, synthetic fixtures, and repository structural checks | Runs via `python3 -m pytest -v tests/` with exit code `0` |
+| `tests/` | Unit tests, end-to-end CLI scenario tests, dashboard builder & Python-vs-JS parity tests, synthetic fixtures, and repository structural checks | Runs via `python3 -m pytest -v tests/` with exit code `0` |
 
 ---
 
@@ -136,10 +160,11 @@ The skill enforces a separation between conversational orchestration (handled by
 
 | Input Type | Source | Validation Rules |
 |---|---|---|
-| Executive Narrative Turn | CLI `--narrative` string or `--narrative-file` UTF-8 text | Must be non-empty after whitespace trimming; maximum length 20,000 characters; sanitized immediately before pattern analysis or logging. |
-| Structured Observations | Optional `--observations-json` JSON array | Each item must contain valid `id` (present in the 32-indicator catalog), `status` in `{"present", "absent", "unknown"}`, and optional `confidence` float in `(0.0, 1.0]`. |
-| Session State | `--session-json` string or `--session-file` path | Must match `assets/schemas/session_schema.json`; required keys `schema_version`, `session_id`, `stage`, `risk_profile`, `indicators`, `asked_probe_ids`, `covered_tiers`. |
-| Sensitive Terms List | Optional `--sensitive-terms` strings during `init-session` | Stored only as normalized redaction matchers in ephemeral session state and masked in all stored excerpts and rendered reports. |
+| Executive Narrative Turn | CLI `--narrative` string, `--narrative-file` UTF-8 text, or browser interview input | Must be non-empty after whitespace trimming; maximum length 20,000 characters; sanitized immediately before pattern analysis or logging. |
+| Structured Observations | Optional `--observations-json` JSON array or browser quick-confirm toggle pills | Each item must contain valid `id` (present in the 32-indicator catalog), `status` in `{"present", "absent", "unknown"}`, and optional `confidence` float in `(0.0, 1.0]`. |
+| Session State | `--session-json` string, `--session-file` path, or browser `Load JSON` file upload | Must match `assets/schemas/session_schema.json`; required keys `schema_version`, `session_id`, `stage`, `risk_profile`, `indicators`, `asked_probe_ids`, `covered_tiers`. |
+| Finalized Report JSON | `build_dashboard.py --report-json` or browser `Load JSON` file upload | Must match `assets/schemas/report_schema.json`; required keys `classification`, `posteriors`, `composite_risk_score`, `tier_breakdown`, `key_drivers`. |
+| Sensitive Terms List | Optional `--sensitive-terms` strings during `init-session` or browser interview setup | Stored only as normalized redaction matchers in ephemeral session state (or volatile browser RAM) and masked in all stored excerpts and rendered reports. |
 | Risk Profile | `--risk-profile` enum: `standard` or `high_exposure` | Determines Bayesian baseline prior probabilities; defaults to `standard`. |
 
 ### 5.2 Core Functional Specifications
@@ -153,6 +178,10 @@ The skill enforces a separation between conversational orchestration (handled by
 | `FR-05` | `report_generator.py` | Generate structured JSON and Markdown diagnostic briefs detailing threat tier classification, Bayesian probabilities, per-tier risk indices, active/negated indicators, unassessed blind spots, and countermeasures. |
 | `FR-06` | `report_generator.py` | Supply domain-tailored, non-damaging passive Canary Protocol verification scripts matched to the inferred corporate elicitation domain (`ma_strategy`, `technical_roadmap`, `board_governance`, `procurement_supply_chain`, `general_operations`), preserving earlier explicit domain matches across subsequent turns. |
 | `FR-07` | `sanitizer.py` / `honeypot_cli.py` | Redact sensitive tokens prior to state persistence or logging, and support immediate zero-fill deletion of ephemeral session files via `purge-session` or `generate-report --purge-session`. |
+| `FR-08` | `build_dashboard.py` / `assets/dashboard_template.html` | Emit a self-contained single-file `dashboard.html` from a live session (`--session-file` or `--session-json`), finalized report (`--report-json`), or built-in reference scenarios, with `window.updateDashboardData()` live refresh support preserving scroll position and camera orientation. |
+| `FR-09` | `assets/dashboard_template.html` | Provide a volatile-RAM in-browser interview mode (`Start New Interview`, Calm Focus Mode toggle, `Purge RAM`, `Load JSON`, `Export JSON`) whose JavaScript sanitizer, span-aware regex matcher, damped Bayesian scorer, adaptive probe selector, and Canary resolver achieve numerical and logical parity with the Python backend. |
+| `FR-10` | `assets/dashboard_template.html` | Render a flat bento dashboard featuring an interactive 3D Threat Topology and Indicator Map (WebGL instanced/meshed node-ring geometry with automatic 2D software projection fallback), HiDPI turn-by-turn Bayesian trajectory plot, 6-tier heatmap, and sortable monospaced (`IBM Plex Mono`, `tabular-nums`) 32-indicator attribution table. |
+| `FR-11` | `build_dashboard.py` / `assets/dashboard_template.html` | Implement a three-icon segmented Light (`#theme-btn-light`), Dark (`#theme-btn-dark`), and System (`#theme-btn-system`) theme selector honoring `DESIGN.md` surface/palette tokens, `prefers-color-scheme` real-time listeners, and backend host OS theme fallback. |
 
 ### 5.3 Adaptive Interview Engine and Tradecraft Branching
 
@@ -208,11 +237,12 @@ Assessment Confidence Rule: When fewer than 3 of the 5 core counterintelligence 
 | Category | Requirement Specification |
 |---|---|
 | Performance Latency | Every `scripts/honeypot_cli.py` command executes locally in under 200 milliseconds on standard hardware for narratives up to 20,000 characters. |
-| Execution Isolation | All Python scripts run entirely offline using the Python 3.10+ standard library with zero external API calls, telemetry, or network sockets. |
-| Data Privacy and OPSEC | No real partner names, contact details, or corporate identifiers persist in logs or permanent storage. Session files store only sanitized indicator states and redacted excerpts, and are securely wiped upon `--purge-session`. |
-| Synthetic Test Data Hygiene | Automated tests and fixtures (`tests/fixtures/synthetic_scenarios.json`) use exclusively synthetic placeholder records, reserved `.invalid` domains, documentation IP ranges, and fictitious telephone ranges with zero real personal data. |
+| Execution Isolation | All Python scripts run entirely offline using the Python 3.10+ standard library with zero external API calls, telemetry, or network sockets. `dashboard.html` executes all diagnostic computation locally in the browser and uses non-blocking webfont loading (`media="print" onload="this.media='all'"`) with offline system font fallbacks so rendering never stalls without internet connectivity. |
+| Python-to-JavaScript Parity | Across all five synthetic scenarios in `tests/fixtures/synthetic_scenarios.json`, the browser JavaScript engine must match the Python backend on threat classification, posteriors (within `1e-4`), composite score (within `0.1`), indicator counts, redaction counts, adaptive probe sequences, and Canary domain selection. |
+| Data Privacy and OPSEC | No real partner names, contact details, or corporate identifiers persist in logs or permanent storage. Session files store only sanitized indicator states and redacted excerpts, and are securely wiped upon `--purge-session`. Browser interview state stays exclusively in volatile JS memory (only the Light/Dark/System UI theme preference uses `localStorage`). |
+| Synthetic Test Data Hygiene | Automated tests, fixtures (`tests/fixtures/synthetic_scenarios.json`), and example payloads (`examples/sample_*.json`) use exclusively synthetic placeholder records, reserved `.invalid` domains, documentation IP ranges, and fictitious telephone ranges with zero real personal data. |
 | Portability | All paths resolve relative to the skill root or configurable environment variables (`HONEYPOT_SKILL_ASSETS_DIR`, `HONEYPOT_SKILL_LOG_LEVEL`). |
-| Extensibility | Adding or recalibrating indicators, likelihoods, probes, or Canary templates requires editing only declarative JSON files in `assets/` followed by `validate-taxonomy`. |
+| Extensibility | Adding or recalibrating indicators, likelihoods, probes, or Canary templates requires editing only declarative JSON files in `assets/` followed by `validate-taxonomy` and rebuilding `dashboard.html`. |
 
 ---
 
@@ -220,14 +250,16 @@ Assessment Confidence Rule: When fewer than 3 of the 5 core counterintelligence 
 
 | Failure Condition or Edge Case | Detection Point | System Behavior | CLI Exit Code |
 |---|---|---|---|
-| Empty, whitespace-only, or oversized (>20 KB) narrative | `sanitizer.validate_narrative` | Rejects turn with explicit JSON error object; leaves session state unmodified | `2` |
+| Empty, whitespace-only, or oversized (>20 KB) narrative | `sanitizer.validate_narrative` / browser submit handler | Rejects turn with explicit JSON error object (or inline UI notice); leaves session state unmodified | `2` |
 | Corrupted or non-JSON `--session-file` or `--session-json` | `interview_engine.load_session_*` | Fails safely with structured `SessionError` message; never overwrites existing file | `2` |
 | Missing or schema-invalid `assets/*.json` file | `taxonomy_engine.load_and_validate_assets` | Halts execution with descriptive `TaxonomyError` identifying missing file or invalid key | `1` |
 | Invalid indicator ID or out-of-range confidence (`<=0` or `>1`) in `--observations-json` | `taxonomy_engine.validate_structured_observations` | Rejects payload with `ValidationError` listing the offending field and allowed bounds | `2` |
-| Sensitive tokens detected in narrative (email, phone, SSN, card, IP, tokenized URL, configured term) | `sanitizer.sanitize_text` | Deterministically replaces sensitive tokens with `[REDACTED_*]`, increments `redaction_count`, logs count only, and continues safely | `0` |
+| Sensitive tokens detected in narrative (email, phone, SSN, card, IP, tokenized URL, configured term) | `sanitizer.sanitize_text` / browser `sanitizeText` | Deterministically replaces sensitive tokens with `[REDACTED_*]`, increments `redaction_count`, logs count only, and continues safely | `0` |
 | Positive regex phrase enclosed in a negation phrase (e.g., `"never asked for money"`) | `taxonomy_engine._has_unnegated_positive_match` | Suppresses enclosed positive match and evaluates indicator cleanly as `absent` | `0` |
 | Conflicting unnegated signals across or within turns | `taxonomy_engine.extract_indicators` | Explicit structured observations override regex heuristics; flags `conflict_flagged = true` for analyst visibility | `0` |
 | Zero indicators matched across a narrative turn | `interview_engine.process_turn` | Marks preceding probe tier as covered and advances cleanly to the next uncovered baseline probe without looping | `0` |
 | Early report generation with fewer than 3 tiers assessed | `bayesian_scorer` / `report_generator` | Generates report normally with `insufficient_data: true`, `confidence.level = "low"`, and explicit blind-spot warnings | `0` |
-| Path traversal (`..`) or directory passed to `--session-file` or `--output-*` | `sanitizer.validate_safe_path` | Rejects unsafe path with `ValidationError`; writes nothing to disk | `2` |
+| Path traversal (`..`) or directory passed to `--session-file`, `--output-*`, or `build_dashboard.py --output` | `sanitizer.validate_safe_path` | Rejects unsafe path with `ValidationError`; writes nothing to disk | `2` |
 | `purge-session` called on an already deleted or missing path | `sanitizer.secure_purge_file` | Returns structured `SessionError` indicating file not found without an unhandled traceback | `2` |
+| Hardware WebGL unavailable or context lost in browser | `assets/dashboard_template.html` 3D renderer | Automatically switches to the interactive 2D software 3D projection engine with full drag/zoom/click inspection and updates the renderer mode label | N/A |
+| Malformed or unrecognized JSON uploaded via browser `Load JSON` | `assets/dashboard_template.html` file loader | Displays an inline critical notice explaining the parse or schema mismatch and leaves existing dashboard datasets unchanged | N/A |

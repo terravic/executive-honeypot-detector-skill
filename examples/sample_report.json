@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0.0",
+  "session_id": "diag-ca2e251212da",
+  "generated_at": "2026-11-13T17:09:07Z",
+  "risk_profile": "high_exposure",
+  "classification": {
+    "id": "tier_3_ci_honeypot",
+    "label": "Tier 3: Advanced CI Threat / Honeypot",
+    "posture_summary": "Multiple cross-tier indicators align with targeted human intelligence (HUMINT) or corporate espionage tradecraft. Immediate non-confrontational containment is warranted."
+  },
+  "confidence": {
+    "level": "high",
+    "insufficient_data": false,
+    "core_tiers_covered": 5,
+    "core_tiers_total": 5,
+    "coverage_percent": 100.0
+  },
+  "posteriors": {
+    "tier_1_benign": 0.0,
+    "tier_2_commercial_fraud": 9e-06,
+    "tier_3_ci_honeypot": 0.999991
+  },
+  "composite_risk_score": 100.0,
+  "tier_breakdown": [
+    {
+      "tier_id": "tier_1_approach",
+      "label": "Tier 1: Approach Vector",
+      "core_ci_tier": true,
+      "covered": true,
+      "risk_index": 80.1,
+      "active_indicators": [
+        "AV-01",
+        "AV-02",
+        "AV-03",
+        "AV-05"
+      ],
+      "disconfirming_indicators": []
+    },
+    {
+      "tier_id": "tier_2_legend",
+      "label": "Tier 2: Legend and Verification",
+      "core_ci_tier": true,
+      "covered": true,
+      "risk_index": 89.5,
+      "active_indicators": [
+        "LV-01",
+        "LV-02",
+        "LV-03",
+        "LV-04"
+      ],
+      "disconfirming_indicators": []
+    },
+    {
+      "tier_id": "tier_3_elicitation",
+      "label": "Tier 3: Information Elicitation",
+      "core_ci_tier": true,
+      "covered": true,
+      "risk_index": 48.4,
+      "active_indicators": [
+        "IE-01",
+        "IE-02"
+      ],
+      "disconfirming_indicators": []
+    },
+    {
+      "tier_id": "tier_4_intimacy",
+      "label": "Tier 4: Intimacy Acceleration",
+      "core_ci_tier": true,
+      "covered": true,
+      "risk_index": 54.6,
+      "active_indicators": [
+        "IA-01",
+        "IA-04"
+      ],
+      "disconfirming_indicators": []
+    },
+    {
+      "tier_id": "tier_5_technical",
+      "label": "Tier 5: Technical Proximity",
+      "core_ci_tier": true,
+      "covered": true,
+      "risk_index": 60.4,
+      "active_indicators": [
+        "TP-02",
+        "TP-03"
+      ],
+      "disconfirming_indicators": []
+    },
+    {
+      "tier_id": "tier_6_financial",
+      "label": "Tier 6: Commercial and Financial Exploitation",
+      "core_ci_tier": false,
+      "covered": true,
+      "risk_index": 0.0,
+      "active_indicators": [],
+      "disconfirming_indicators": [
+        "FF-03"
+      ]
+    }
+  ],
+  "blind_spots": [],
+  "indicators_summary": {
+    "total_catalog_indicators": 32,
+    "present_count": 14,
+    "absent_count": 1,
+    "unassessed_count": 17
+  },
+  "top_drivers": [
+    {
+      "id": "TP-02",
+      "name": "Peripheral, USB, or Charging Cable Connection Requests",
+      "tier": "tier_5_technical",
+      "status": "present",
+      "confidence": 0.95,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -2.7646,
+        "tier_2_commercial_fraud": -2.501,
+        "tier_3_ci_honeypot": -0.2182
+      },
+      "impact_spread": 2.5465
+    },
+    {
+      "id": "FF-03",
+      "name": "Requests for Wire Transfers, Loans, or Crypto Investments",
+      "tier": "tier_6_financial",
+      "status": "absent",
+      "confidence": 0.95,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -0.045,
+        "tier_2_commercial_fraud": -2.2926,
+        "tier_3_ci_honeypot": -0.1497
+      },
+      "impact_spread": 2.2476
+    },
+    {
+      "id": "IE-02",
+      "name": "Technical Roadmap or Proprietary IP Probing",
+      "tier": "tier_3_elicitation",
+      "status": "present",
+      "confidence": 0.9,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -2.4534,
+        "tier_2_commercial_fraud": -2.1037,
+        "tier_3_ci_honeypot": -0.2157
+      },
+      "impact_spread": 2.2377
+    },
+    {
+      "id": "LV-02",
+      "name": "Zero Verifiable Institutional Footprint",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.9,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -2.4534,
+        "tier_2_commercial_fraud": -0.4125,
+        "tier_3_ci_honeypot": -0.2614
+      },
+      "impact_spread": 2.192
+    },
+    {
+      "id": "IA-04",
+      "name": "Isolation from Trusted Advisors or Family",
+      "tier": "tier_4_intimacy",
+      "status": "present",
+      "confidence": 0.85,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -2.1413,
+        "tier_2_commercial_fraud": -0.5361,
+        "tier_3_ci_honeypot": -0.351
+      },
+      "impact_spread": 1.7903
+    },
+    {
+      "id": "TP-03",
+      "name": "Inquisitiveness Toward Passcodes, MFA, or Credentials",
+      "tier": "tier_5_technical",
+      "status": "present",
+      "confidence": 0.9,
+      "damping_factor": 0.7071,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -1.813,
+        "tier_2_commercial_fraud": -1.2284,
+        "tier_3_ci_honeypot": -0.1848
+      },
+      "impact_spread": 1.6282
+    },
+    {
+      "id": "IE-01",
+      "name": "Steering Toward M&A, Governance, or Reorganizations",
+      "tier": "tier_3_elicitation",
+      "status": "present",
+      "confidence": 0.9,
+      "damping_factor": 0.7071,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -1.6644,
+        "tier_2_commercial_fraud": -1.3903,
+        "tier_3_ci_honeypot": -0.1369
+      },
+      "impact_spread": 1.5276
+    },
+    {
+      "id": "AV-03",
+      "name": "Engineered Serendipity and Niche Alignment",
+      "tier": "tier_1_approach",
+      "status": "present",
+      "confidence": 0.85,
+      "damping_factor": 1.0,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -1.7316,
+        "tier_2_commercial_fraud": -0.9875,
+        "tier_3_ci_honeypot": -0.3271
+      },
+      "impact_spread": 1.4045
+    },
+    {
+      "id": "LV-01",
+      "name": "Shallow Low-Verifiability Cover Career",
+      "tier": "tier_2_legend",
+      "status": "present",
+      "confidence": 0.85,
+      "damping_factor": 0.7071,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -1.3344,
+        "tier_2_commercial_fraud": -0.3589,
+        "tier_3_ci_honeypot": -0.2148
+      },
+      "impact_spread": 1.1196
+    },
+    {
+      "id": "IA-01",
+      "name": "Premature Declarations of Love or Exclusivity",
+      "tier": "tier_4_intimacy",
+      "status": "present",
+      "confidence": 0.85,
+      "damping_factor": 0.7071,
+      "log_likelihood_deltas": {
+        "tier_1_benign": -1.1596,
+        "tier_2_commercial_fraud": -0.183,
+        "tier_3_ci_honeypot": -0.2313
+      },
+      "impact_spread": 0.9766
+    }
+  ],
+  "countermeasures": [
+    {
+      "phase": "Immediate Posture (Behavioral Continuity)",
+      "action": "Maintain normal, calm behavioral continuity without confronting the partner, accusing them of espionage, or abruptly terminating contact.",
+      "objective": "Prevents alerting handler networks and avoids triggering asset extraction, evidence destruction, or immediate leverage deployment."
+    },
+    {
+      "phase": "Information Control (Canary Protocol)",
+      "action": "Cease all discussion of real proprietary initiatives and, only if coordinated with corporate security leadership, deploy a benign, slightly altered Canary detail to detect unauthorized onward transmission.",
+      "objective": "Verifies active intelligence collection passively without risking real corporate harm."
+    },
+    {
+      "phase": "Technical Isolation and MDM Audit",
+      "action": "Submit corporate smartphones, laptops, and hardware tokens discreetly to the corporate security team for offline forensic inspection; silently rotate corporate passwords and MFA credentials from an uncompromised device; discontinue use of any gifted cables or electronics.",
+      "objective": "Neutralizes potential spyware payloads, compromised USB peripherals, or lateral corporate network access."
+    },
+    {
+      "phase": "Privileged Formal Escalation",
+      "action": "Brief the Chief Security Officer (CSO) and Corporate General Counsel under strict attorney-client privilege to coordinate insider-threat defense and external liaison if sovereign intelligence involvement is indicated.",
+      "objective": "Mobilizes institutional counterintelligence protections while preserving executive legal and reputational safeguards."
+    }
+  ],
+  "canary_protocol": {
+    "recommended": true,
+    "domain_key": "ma_strategy",
+    "domain_label": "Corporate M&A and Deal Strategy",
+    "script": "During a casual conversation when work arises naturally, mention a strictly benign, non-material scheduling inaccuracy (for example, stating that an internal portfolio review committee moved from Thursday to a non-existent regional retreat next month) using a distinct synthetic internal label agreed with your CSO.",
+    "observation_criteria": "Monitor whether that unique synthetic label or distorted review timing resurfaces via external analysts, competitor chatter, unusual partner follow-up queries, or targeted spear-phishing.",
+    "safety_guardrail": "Never plant fabricated material non-public information (MNPI) that could violate securities law or cause market distortion; coordinate any deployment with Corporate General Counsel."
+  },
+  "opsec_metadata": {
+    "redaction_count": 4,
+    "turn_count": 4,
+    "session_purged": false
+  },
+  "legal_disclaimer": "OPERATIONAL AND LEGAL DISCLAIMER: This diagnostic report provides structured behavioral risk modeling derived from established counterintelligence and fraud-prevention frameworks. It does not constitute legal advice, a formal background investigation, law enforcement intelligence, or psychological counseling. Do not confront a suspected operative unilaterally. Consult your Chief Security Officer (CSO) and Corporate General Counsel under appropriate legal privilege before acting on elevated findings."
+}

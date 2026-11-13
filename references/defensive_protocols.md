@@ -9,7 +9,7 @@ This manual details defensive actions corresponding to the three threat classifi
 When the assessment yields high confidence in benign organic dynamics:
 
 - **Reassurance**: Communicate clearly that observed patterns align with ordinary interpersonal behavior.
-- **Standard Compartmentalization**: Maintain baseline corporate hygiene—do not discuss unannounced material non-public information (MNPI), board deliberations, or classified technical details outside authorized corporate channels.
+- **Standard Compartmentalization**: Maintain baseline corporate hygiene; do not discuss unannounced material non-public information (MNPI), board deliberations, or classified technical details outside authorized corporate channels.
 - **Endpoint Discipline**: Maintain screen locks, hardware MFA, and corporate device separation as standard practice for all personal contacts.
 
 ---
@@ -20,7 +20,7 @@ When indicators center on opaque wealth claims, rapid emotional attachment, and 
 
 1. **Immediate Financial Firewall**: Halt all wire transfers, bridge loans, cryptocurrency platform deposits, escrow arrangements, or luxury liquid gifts immediately.
 2. **Freeze Account and Identity Exposure**: If personal banking details, passport scans, or intimate communications were shared, notify private wealth advisors and legal counsel promptly to institute fraud alerts and credit monitoring.
-3. **Licensed Independent Verification**: Before maintaining contact, obtain objective verification of employment, corporate filings, and identity through vetted executive protection or licensed investigative counsel—never rely on documents or third-party references supplied by the partner.
+3. **Licensed Independent Verification**: Before maintaining contact, obtain objective verification of employment, corporate filings, and identity through vetted executive protection or licensed investigative counsel; never rely on documents or third-party references supplied by the partner.
 4. **Evidence Preservation and Calm Disengagement**: Preserve message records, payment requests, and transaction identifiers securely before ending communication quietly to reduce retaliation or extortion escalation.
 
 ---
