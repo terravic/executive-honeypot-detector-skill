@@ -23,6 +23,11 @@ For detailed architectural specifications, mathematical derivations, and error-h
 
 ![Counterintelligence Honeypot Diagnostic Skill Architecture and Workflow](assets/skill_architecture_flow.png)
 
+### Standalone Interactive Dashboard Preview
+The self-contained browser interface (`dashboard.html`) renders the primary threat classification, normalized Bayesian posteriors, interactive 3D Threat Topology and Indicator Map, turn-by-turn probability evolution, monospaced log-likelihood attribution table, sanitized turn log, and volatile-RAM self-service interview controls.
+
+![Standalone Counterintelligence Risk Diagnostic Dashboard](assets/dashboard_preview.png)
+
 ---
 
 ## 2. Project Structure
@@ -39,6 +44,7 @@ All paths are relative to the project root directory:
 |-- dashboard.html                           # Pre-built standalone interactive diagnostic dashboard
 |-- requirements.txt                         # Test and YAML validation dependencies
 |-- assets/
+|   |-- dashboard_preview.png                # Preview screenshot of the standalone HTML dashboard
 |   |-- dashboard_template.html              # Self-contained HTML/CSS/JS dashboard source template
 |   |-- indicators_taxonomy.json             # 32 weighted CI and fraud indicators plus prior profiles
 |   |-- probes_and_countermeasures.json      # Adaptive probes, dynamic rules, and Canary playbooks
